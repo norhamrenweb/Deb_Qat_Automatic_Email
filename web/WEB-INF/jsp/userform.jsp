@@ -47,7 +47,7 @@
                                     <input type="text" class="form-control" name="txtusuario" id="txtusuario" placeholder="<spring:message code='etiq.txtinsertuser'/>" required="required">    
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1"><spring:message code="etiq.txtpassword"/></label> 
+                                    <label for="exampleInputPassword1"><%--<spring:message code="etiq.txtpassword"/>--%></label> 
                                     <input type="password" class="form-control" name="txtpassword" id="txtpassword" placeholder="<spring:message code='etiq.txtinsertpassword'/>" ><!--required="required"-->
                                 </div>
                                 <button type="submit" name="submit" value='<spring:message code="etiq.txtlogin"/>' style="width: 100%; font-size:1.1em;" class="btn btn-large btn btn-success btn-lg btn-block" ><b>Login</b></button>
