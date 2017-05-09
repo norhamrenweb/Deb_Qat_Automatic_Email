@@ -12,7 +12,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Welcome</title>
         <link rel="stylesheet" type="text/css" href="<c:url value="/recursos/css/bootstrap.css"/>" />
         <link rel="stylesheet" type="text/css" href="<c:url value="/estilotabla.css"/>" />

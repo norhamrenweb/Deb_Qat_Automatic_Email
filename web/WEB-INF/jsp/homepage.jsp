@@ -281,18 +281,18 @@ var ajax;
                             <td>${lecciones.start}</td>
                             <td>${lecciones.finish}</td>--%>
                             <td>
-                                <div class="col-xs-3">
-                                    <input name="TXTid_lessons_attendance" class="btn-unbutton" type="image" src="<c:url value="/recursos/img/btn/btn_Attendance.svg"/>" value="${lecciones.id}" id="attendance" onclick="rowselect(${lecciones.id})" width="40px" data-placement="bottom" title="Attendance">
+                                <div class="col-xs-4">
+                                    <input name="TXTid_lessons_edit" class="btn-unbutton" type="image" src="<c:url value="/recursos/img/btn/btn_Edit.svg"/>" value="${lecciones.id}" id="edit" onclick="rowselect(${lecciones.id})" width="40px" data-placement="bottom" title="Edit">
                                 </div>
-                                <div class="col-xs-3">
-                                    <input name="TXTid_lessons_detalles" type="image" src="<c:url value="/recursos/img/btn/btn_details.svg"/>" value="${lecciones.id}" id="details" onclick="detailsSelect(${lecciones.id})" width="40px" data-placement="bottom" title="Details">
+                                <div class="col-xs-4">
+                                    <input name="TXTid_lessons_viewLog" type="image" src="<c:url value="/recursos/img/btn/ViewLog.svg"/>" value="${lecciones.id}" id="viewLog" onclick="detailsSelect(${lecciones.id})" width="40px" data-placement="bottom" title="View Log">
                                 </div>
-                                <div class="col-xs-3">
-                                    <input name="TXTid_lessons_modificar" type="image" src="<c:url value="/recursos/img/btn/btn_Edit.svg"/>" value="${lecciones.id}" id="modify" onclick="modifySelect(${lecciones.id})" width="40px" data-placement="bottom" title="Modify">
+                                <div class="col-xs-4">
+                                    <input name="TXTid_lessons_run" type="image" src="<c:url value="/recursos/img/btn/run.svg"/>" value="${lecciones.id}" id="run" onclick="modifySelect(${lecciones.id})" width="40px" data-placement="bottom" title="Run">
                                 </div>
-                                <div class="col-xs-3">
+<%--                            <div class="col-xs-3">
                                     <input class="delete" name="TXTid_lessons_eliminar" type="image" src="<c:url value="/recursos/img/btn/btn_delete.svg"/>" value="${lecciones.id}" id="delete" onclick="deleteSelectSure(${lecciones.id}, '${lecciones.name}')" width="40px" data-placement="bottom" title="Delete">
-                                </div>
+                                </div>--%>
                             </td>
                         </tr>
                     </c:forEach>
