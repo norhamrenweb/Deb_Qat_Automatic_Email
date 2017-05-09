@@ -701,7 +701,7 @@ $("#method").on('mouseover', 'option' , function(e) {
                             </div>
                             <div class="col-xs-3 center-block form-group">
                                 <label class="radio"><input type="radio" name="event">Single event</label>
-                                <label class="radio"><input type="radio" name="merit">Cumulative events</label>
+                                <label class="radio"><input type="radio" name="event">Cumulative events</label>
                             </div>
                             <div class="col-xs-3 center-block form-group">
                                 <label class="radio"><input type="radio" name="run">Disable</label>
