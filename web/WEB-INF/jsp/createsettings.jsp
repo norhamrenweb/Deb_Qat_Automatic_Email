@@ -51,21 +51,7 @@ $("#method").on('mouseover', 'option' , function(e) {
             var objectiveValue = $('#objective').select("selected").val();
             var contentValue = $('#content').select("selected").val();
             var editValue = $('#method').select("selected").val();
-            function funcionCallBackSubject()
-            {
-                if (ajax.readyState === 4) {
-                    if (ajax.status === 200) {
-                        document.getElementById("subject").innerHTML = ajax.responseText;
-                        //Activamos el select de subject
-                        var levelValue = $('#level').select("selected").val();
-                        if( levelValue !== "?"){
-                          $('#subject').attr("disabled", false);
-                       }else{
-                          $('#subject').attr("disabled", true);
-                       };
-                    }
-                }
-            }
+            
             function funcionCallBackObjective()
             {
                 if (ajax.readyState === 4) {
@@ -75,27 +61,6 @@ $("#method").on('mouseover', 'option' , function(e) {
                 }
             }
 
-            function comboSelectionLevel()
-            {
-                if (window.XMLHttpRequest) //mozilla
-                {
-                    ajax = new XMLHttpRequest(); //No Internet explorer
-                } else
-                {
-                    ajax = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-                $('#namenewobjective').empty();
-                $('#descriptionnewobjective').empty();
-                $('#content').empty();
-                
-                ajax.onreadystatechange = funcionCallBackSubject;
-                var seleccion1 = document.getElementById("level").value;
-                ajax.open("GET", "subjectlistLevel.htm?seleccion1=" + seleccion1, true);
-
-                ajax.send("");
-
-            }
             function comboSelectionSubject()
             {
                 if (window.XMLHttpRequest) //mozilla
@@ -499,6 +464,51 @@ $("#method").on('mouseover', 'option' , function(e) {
 
                     });    
                 }
+                function funcionCallBackJob()
+            {
+//                if (ajax.readyState === 4) {
+//                    if (ajax.status === 200) {
+                        //document.getElementById("subject").innerHTML = ajax.responseText;
+                        //Capturamos el valor del type jobs seleccionado
+                        var jobselected = $('#typeJob').select("selected").val();
+                        //Mostramos el div para cada job
+                        if( jobselected === '1'){
+                         $('#AccountingNotification').removeClass("hidden");
+                         $('#AttendanceNotification').addClass("hidden");
+                         $('#gradeBook').addClass("hidden");
+                       }else if(jobselected === '2'){
+                         $('#AttendanceNotification').removeClass("hidden");
+                         $('#AccountingNotification').addClass("hidden");
+                         $('#gradeBook').addClass("hidden");
+                       }else if(jobselected === '6'){
+                         $('#gradeBook').removeClass("hidden");
+                         $('#AccountingNotification').addClass("hidden");
+                         $('#AttendanceNotification').addClass("hidden");
+                       };
+//                    }
+//                }
+            }
+            function comboSelectionJob()
+            {
+                if (window.XMLHttpRequest) //mozilla
+                {
+                    ajax = new XMLHttpRequest(); //No Internet explorer
+                } else
+                {
+                    ajax = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+
+                $('#namenewobjective').empty();
+                $('#descriptionnewobjective').empty();
+                $('#content').empty();
+                
+                ajax.onreadystatechange = funcionCallBackJob;
+                var seleccion1 = document.getElementById("typeJob").value;
+                ajax.open("GET", "subjectlistLevel.htm?seleccion1=" + seleccion1, true);
+
+                ajax.send("");
+
+            }
             $(function () {
                 $('#addObjective').click(function () {
                     $('#formAddobjetive').removeClass("hidden");
@@ -604,9 +614,147 @@ $("#method").on('mouseover', 'option' , function(e) {
         </style>
     </head>
     <body>
+         <div class="container">
+            <h1 class="text-center">Create Jobs</h1>
 
 
-        <div class="container">
+            <form:form id="formSettings" method ="post" action="createsetting.htm?select=createsetting" >
+
+                <fieldset>
+                    <legend>Select type Jobs</legend>
+
+                    <div class="col-xs-12">
+                        <div class="col-xs-6 form-group">
+                            <label class="control-label"><spring:message code="etiq.txtlevels"/></label>
+                            <select class="form-control" name="TXTlevel" id="typeJob" onchange="comboSelectionJob()">
+                                <option value="0" >Select type</option>
+                                <option value="1" >Accounting notification</option>
+                                <option value="2" >Attendance notification</option>
+                                <option value="3" >Behavior notification</option>
+                                <option value="4" >Create day attendance</option>
+                                <option value="5" >Custom maintenance Job</option>
+                                <option value="6" >Grade book</option>
+                                <option value="7" >Library late fee</option>
+                                <option value="8" >Library late notification</option>
+                                <option value="9" >NelNet/Pay now notification</option>
+                                <option value="10" >Web form notification</option>
+                                <%--<c:forEach var="levels" items="${typejob}">
+                                    <option value="${job.id[0]}" >${job.name}</option>
+                                </c:forEach>--%>
+                            </select>
+                        </div>
+
+                    </div>
+                </fieldset>
+            </form:form>
+            <form:form id="formpepi" method ="post"  >
+                <fieldset class="hidden" id="AccountingNotification">
+                    <legend>Accounting Notification</legend>
+
+                        <div class="col-xs-3 center-block form-group" id="addObjective">
+                            <label class="control-label">Title job</label>
+                            <input type="text" class="form-control" name="TXTnamenewobjective" id="namenewobjective"  placeholder="Name">
+                        </div>
+                        <div class="col-xs-12 center-block form-group">
+                            <label class="control-label">Notification Message</label>
+                            <textarea type="text" class="form-control" name="TXTnamenewobjective" id="descriptionnewobjective"  placeholder="Comments"></textarea>
+                        </div>
+                        <div class="col-xs-12 center-block form-group">
+                            <label class="control-label">Frecuency</label>
+                            <label class="radio-inline"><input type="radio" name="frecuency">Off</label>
+                            <label class="radio-inline"><input type="radio" name="frecuency">Daily</label>
+                            <label class="radio-inline"><input type="radio" name="frecuency">Weekly</label>
+                            <label class="radio-inline"><input type="radio" name="frecuency">Parent preference</label>
+                        </div>
+                        <div class="col-xs-2 text-center form-group paddingLabel">
+                            <input type="button" name="AddObjective" value="save" class="btn btn-success" id="AddObjective" data-target=".bs-example-modal-lg" onclick="saveaddObjective()"/>
+                        </div>
+                </fieldset>
+                <fieldset class="hidden" id="AttendanceNotification">
+                    <legend>Attendance Notification</legend>
+                    <%--Edit objective--%>
+                        <div class="col-xs-3 center-block form-group" id="addObjective">
+                            <label class="control-label">Edit objective</label>
+                            <input type="text" class="form-control" name="TXTeditNameObjective" id="editNameObjective"  placeholder="Name">
+                        </div>
+                        <div class="col-xs-7 center-block form-group">
+                            <label class="control-label">Comments</label>
+                            <textarea type="text" class="form-control" name="TXTeditDescriptionObjective" id="editDescriptionObjective"  placeholder="Comments"></textarea>
+                        </div>
+                        <div class="col-xs-2 center-block form-group paddingLabel">
+                            <input type="button" name="AddObjective" value="Save" class="btn btn-success" id="savedEditObjective" data-target=".bs-example-modal-lg" onclick="saveeditObjective()"/>
+   
+                        </div>
+                </fieldset>
+                
+                <fieldset class="hidden" id="gradeBook">
+                    <legend>Grade book</legend>
+                    
+                        <div class="col-xs-3 center-block form-group">
+                            <label class="control-label">Title Job</label>
+                            <input type="text" class="form-control" name="TXTnamenewobjective" id="titleJob"  placeholder="Name">
+                        </div>
+                            <div class="col-xs-12 center-block form-group">
+                            <div class="col-xs-3 center-block form-group">
+                                <label class="radio"><input type="radio" name="merit">Demerit</label>
+                                <label class="radio"><input type="radio" name="merit">Merit</label>
+                            </div>
+                            <div class="col-xs-3 center-block form-group">
+                                <label class="radio"><input type="radio" name="event">Single event</label>
+                                <label class="radio"><input type="radio" name="merit">Cumulative events</label>
+                            </div>
+                            <div class="col-xs-3 center-block form-group">
+                                <label class="radio"><input type="radio" name="run">Disable</label>
+                                <label class="radio"><input type="radio" name="run">Run daily</label>
+                                <label class="radio"><input type="radio" name="run">Run weekly</label>
+                            </div>
+                            <div class="col-xs-3 center-block form-group">
+                            <label class="control-label">Run at:</label>
+                            <select class="form-control" name="TXTrunAt">
+                                <option value="0">00:00</option>
+                                <option value="1">01:00</option>
+                                <option value="2">02:00</option>
+                                <option value="3">03:00</option>
+                                <option value="4">04:00</option>
+                                <option value="5">05:00</option>
+                                <option value="6">06:00</option>
+                                <option value="7">07:00</option>
+                                <option value="8">08:00</option>
+                                <option value="9">09:00</option>
+                                <option value="10">10:00</option>
+                                <option value="11">11:00</option>
+                                <option value="12">12:00</option>
+                                <option value="13">13:00</option>
+                                <option value="14">14:00</option>
+                                <option value="15">15:00</option>
+                                <option value="16">16:00</option>
+                                <option value="17">17:00</option>
+                                <option value="18">18:00</option>
+                                <option value="19">19:00</option>
+                                <option value="20">20:00</option>
+                                <option value="21">21:00</option>
+                                <option value="22">22:00</option>
+                                <option value="23">23:00</option>
+                                
+                            </select>
+                        </div>
+                        </div>
+                        <div class="col-xs-12 center-block form-group">
+                            <label class="control-label">Notification Message</label>
+                            <textarea type="text" class="form-control" name="TXTnamenewobjective" id="descriptionnewobjective"  placeholder="Comments"></textarea>
+                        </div>
+                        
+                        <div class="col-xs-2 text-center form-group paddingLabel">
+                            <input type="button" name="AddObjective" value="save" class="btn btn-success" id="AddObjective" data-target=".bs-example-modal-lg" onclick="saveaddObjective()"/>
+                        </div>
+                </fieldset>
+  
+                       
+            </form:form>
+                      
+        </div>
+<!--        ANTIGUO CREATE LESSONS USADO COMO REFERENCIA-->
+<%--        <div class="container">
             <h1 class="text-center">Create Scheme of Work</h1>
 
 
@@ -677,7 +825,7 @@ $("#method").on('mouseover', 'option' , function(e) {
             <form:form id="formpepi" method ="post"  >
                 <fieldset class="hidden" id="formAddobjetive">
                     <legend>Add objective to <span id="objectiveSelectedForAdd"></span></legend>
-                    <%--Add objective--%>
+                    Add objective
                         <div class="col-xs-3 center-block form-group" id="addObjective">
                             <label class="control-label">Name new objective</label>
                             <input type="text" class="form-control" name="TXTnamenewobjective" id="namenewobjective"  placeholder="Name">
@@ -692,7 +840,7 @@ $("#method").on('mouseover', 'option' , function(e) {
                 </fieldset>
                 <fieldset class="hidden" id="formEditobjetive">
                     <legend>Edit objective in <span id="objectiveSelectedForEdit"></span></legend>
-                    <%--Edit objective--%>
+                    Edit objective
                         <div class="col-xs-3 center-block form-group" id="addObjective">
                             <label class="control-label">Edit objective</label>
                             <input type="text" class="form-control" name="TXTeditNameObjective" id="editNameObjective"  placeholder="Name">
@@ -803,7 +951,7 @@ $("#method").on('mouseover', 'option' , function(e) {
                         </div>
                     </div>
                 </fieldset>        
-        </div>
+        </div>--%>
         
         <div id="modalConfirmeDeleteObjective">
             <!-- Modal -->
