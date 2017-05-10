@@ -53,7 +53,7 @@
 <!--    <bean class="Controllers.ProgressbyStudent" id="studentprog"/>-->
     <bean class="Controllers.CreateSettingControlador" id="createsetting"/>
 <!--    <bean class="Controllers.CreateLessonControlador" id="createlesson"/>-->
-    <bean class="Controllers.LessonsListControlador" id="lessonsList"/>
+    <bean class="Controllers.JobsListControlador" id="lessonsList"/>
 <!--    <bean class="Controllers.ProgressControlador" id="lessonprogress"/>-->
 <!--    <bean class="Controllers.LessonIdeaControlador" id="lessonidea"/>
     <bean class="Controllers.EditLessonControlador" id="editlesson"/>-->

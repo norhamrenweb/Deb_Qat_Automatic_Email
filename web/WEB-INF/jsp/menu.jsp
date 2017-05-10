@@ -18,7 +18,7 @@
     <!--MENU LATERAL-->
     <div id="barralateral">
         <nav>
-            <div class="col-xs-12 iconosmenulateral"><a href="<c:url value="/homepage/loadLessons.htm"/>" ><input type="image" src="<c:url value="/recursos/img/iconos/home-01.svg"/>" data-toggle="tooltip" data-placement="top" title="<spring:message code="etiq.txthome"/>"></a></div>
+            <div class="col-xs-12 iconosmenulateral"><a href="<c:url value="/homepage/loadJobs.htm"/>" ><input type="image" src="<c:url value="/recursos/img/iconos/home-01.svg"/>" data-toggle="tooltip" data-placement="top" title="<spring:message code="etiq.txthome"/>"></a></div>
             <div class="col-xs-12 iconosmenulateral"><a href="lessonList.htm?accion=loadLessons"><div class="center-block"><input type="image" src="<c:url value="/recursos/img/iconos/Calendar-01.svg"/>" data-toggle="tooltip" data-placement="top" title="View calendar"></div></a></div>
             <div class="col-xs-12 iconosmenulateral"><a href="<c:url value="/lessonidea/start.htm"/>"><div class="center-block"><input type="image" src="<c:url value="/recursos/img/iconos/LessonsIdea.svg"/>" data-toggle="tooltip" data-placement="top" title="Lessons Idea"></div></a></div>
             <div class="col-xs-12 iconosmenulateral"><a href="<c:url value="/createlesson/start.htm"/>" ><div class="center-block"><input type="image" src="<c:url value="/recursos/img/iconos/classroomDashboard-01.svg"/>" data-toggle="tooltip" data-placement="top" title="<spring:message code="etiq.txtlessons"/>"></div></a></div>

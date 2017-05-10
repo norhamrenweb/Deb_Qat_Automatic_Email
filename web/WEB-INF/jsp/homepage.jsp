@@ -55,54 +55,54 @@ function deleteSelectSure(deleteLessonsSelected, deleteLessonsName) {
 }
 //   
 var ajax;
- function funcionCallBackdetailsLesson()
-    {
-           if (ajax.readyState===4){
-                if (ajax.status===200){
-                   var object = JSON.parse(ajax.responseText);
-                   var s = JSON.parse(object.students);
-                   var c =  JSON.parse(object.contents);
-                   
-//                   var cntContent = (object.contents).toString();
-//                   var Contents = cntContent.substr(1,cntContent.length - 2);
-//                   var r = Contents.split(",");
-                        //var tableObjective = $('#tableobjective').DataTable();
-                        $('#nameLessonDetails').empty();
-                        $('#nameLessonDetails').append('Details '+nameLessons);
-                        //$('#detailsStudents').empty();
-                        $('#studentarea').append('<table id="detailsStudents" class="table table-striped">');
-                        $.each(s, function (i,student){
-                            $('#detailsStudents').append('<tr><td class="studentDetails">'+s[i].studentname+'</td></tr>');
-                            $("tr:odd").addClass("par");
-                            $("tr:even").addClass("impar");
-                        //    $("tr:odd").css("background-color", "lightgray");
-                        });
-                        $('#contentDetails').empty();
-                        $.each(c, function (i, content){
-                            $('#contentDetails').append('<li>'+c[i]+'</li>');
-                        });
-                        
-                        
-                        $('#methodDetails').empty();
-                        $('#methodDetails').append('<tr><td>'+object.method+'</td></tr>');
-                        $('#commentDetails').empty();
-                        $('#commentDetails').append('<tr><td>'+object.comment+'</td></tr>');
-                        $('#detailsLesson').modal('show');
+// function funcionCallBackdetailsLesson()
+//    {
+//           if (ajax.readyState===4){
+//                if (ajax.status===200){
+//                   var object = JSON.parse(ajax.responseText);
+//                   var s = JSON.parse(object.students);
+//                   var c =  JSON.parse(object.contents);
+//                   
+////                   var cntContent = (object.contents).toString();
+////                   var Contents = cntContent.substr(1,cntContent.length - 2);
+////                   var r = Contents.split(",");
+//                        //var tableObjective = $('#tableobjective').DataTable();
+//                        $('#nameLessonDetails').empty();
+//                        $('#nameLessonDetails').append('Details '+nameLessons);
+//                        //$('#detailsStudents').empty();
+//                        $('#studentarea').append('<table id="detailsStudents" class="table table-striped">');
+//                        $.each(s, function (i,student){
+//                            $('#detailsStudents').append('<tr><td class="studentDetails">'+s[i].studentname+'</td></tr>');
+//                            $("tr:odd").addClass("par");
+//                            $("tr:even").addClass("impar");
+//                        //    $("tr:odd").css("background-color", "lightgray");
 //                        });
-//                        var commentgeneral = $('#tableobjective tbody tr td:eq(2)').text();
-//                        $('#tableobjective tbody tr td:eq(2)').empty();
-//                        $('#tableobjective tbody tr td:eq(2)').append("<input value='"+commentgeneral+"'></input>");   
-                           
-                         
-//     $('#tableobjective tbody tr td:eq(4)').on('click', 'tr', 'td:eq(4)', function () {
-//        
-//        var dataObjective = tableObjective.row( this ).data();
-//        dataObjective1 = dataObjective['col5'];
-//        selectionObjective();
-//    } ); 
-                    }
-                }
-            }
+//                        $('#contentDetails').empty();
+//                        $.each(c, function (i, content){
+//                            $('#contentDetails').append('<li>'+c[i]+'</li>');
+//                        });
+//                        
+//                        
+//                        $('#methodDetails').empty();
+//                        $('#methodDetails').append('<tr><td>'+object.method+'</td></tr>');
+//                        $('#commentDetails').empty();
+//                        $('#commentDetails').append('<tr><td>'+object.comment+'</td></tr>');
+//                        $('#detailsLesson').modal('show');
+////                        });
+////                        var commentgeneral = $('#tableobjective tbody tr td:eq(2)').text();
+////                        $('#tableobjective tbody tr td:eq(2)').empty();
+////                        $('#tableobjective tbody tr td:eq(2)').append("<input value='"+commentgeneral+"'></input>");   
+//                           
+//                         
+////     $('#tableobjective tbody tr td:eq(4)').on('click', 'tr', 'td:eq(4)', function () {
+////        
+////        var dataObjective = tableObjective.row( this ).data();
+////        dataObjective1 = dataObjective['col5'];
+////        selectionObjective();
+////    } ); 
+//                    }
+//                }
+//            }
    function rowselect(LessonsSelected)
     {
         //ESTO PARA PINCHAR EN LA FILAvar LessonsSelected = data1;
@@ -250,7 +250,7 @@ var ajax;
         <div class="col-xs-12">
             <div class="col-sm-12" id="maincontainer">
                 <div class="col-sm-12 center-block text-center">
-                    <h2>JOBS</h2>
+                    <h2>Maintenance JOBS</h2>
                 </div>
             </div>
             <div class="container">
@@ -258,28 +258,19 @@ var ajax;
                     <thead>
                         <tr>
                             <td>id</td>
-                            <td>Type</td>
+                            <td>Job Name</td>
                             <td>Description</td>
-                            <td>Schedule</td>
                             <td>Last Run</td>
-                            
-<%--                            <td>Date</td>
-                            <td>Start Hour</td>
-                            <td>End Hour</td>--%>
                             <td><spring:message code="etiq.actionlessons"/></td>
                         </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="lecciones" items="${lessonslist}" >
+                    <c:forEach var="jobs" items="${jobslist}" >
                         <tr>
-                            <td>${lecciones.id}</td>
-                            <td>${lecciones.name}</td>
-                            <td>${lecciones.level.name}</td>
-                            <td>${lecciones.subject.name}</td>
-                            <td>${lecciones.objective.name}</td>
-<%--                            <td>${lecciones.date}</td>
-                            <td>${lecciones.start}</td>
-                            <td>${lecciones.finish}</td>--%>
+                            <td>${jobs.id}</td>
+                            <td>${jobs.name}</td>
+                            <td>${jobs.description}</td>
+                            <td>${jobs.lastrun}</td>
                             <td>
                                 <div class="col-xs-4">
                                     <input name="TXTid_lessons_edit" class="btn-unbutton" type="image" src="<c:url value="/recursos/img/btn/btn_Edit.svg"/>" value="${lecciones.id}" id="edit" onclick="rowselect(${lecciones.id})" width="40px" data-placement="bottom" title="Edit">
