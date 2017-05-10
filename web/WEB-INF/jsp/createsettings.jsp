@@ -20,29 +20,33 @@
     
         <script>
 $(document).ready(function(){
+    var userLang = navigator.language || navigator.userLanguage;
+        $('#dateStart').datetimepicker({
+            format: 'YYYY-MM-DD',
+            locale: userLang.valueOf(),
+            daysOfWeekDisabled: [0, 6]
+        });
+        
+        $('#dateEnd').datetimepicker({
+            
+            format: 'YYYY-MM-DD',
+            locale: userLang.valueOf(),
+            daysOfWeekDisabled: [0, 6]
+        });
+        
+        $("#dateStart").on("dp.change", function (e) {
+            $('#dateEnd').data("DateTimePicker").minDate(e.date);
+        });       
+        
+        $("#dateEnd").on("dp.change", function (e) {
+            $('#dateStart').data("DateTimePicker").maxDate(e.date);
+        });
 
 
+        
 
-$("#method").on('mouseover', 'option' , function(e) {
-    
-        var $e = $(e.target);
-    
-    if ($e.is('option')) {
-        $('#method').popover('destroy');
-        $("#method").popover({
-            animation: 'true',
-            trigger: 'hover',
-            placement: 'right',
-            title: $e.attr("data-title"),
-            content: $e.attr("data-content")
-        }).popover('show');
-    }
 });
 
-});
-
-
-          
           
 
             var ajax;
@@ -475,15 +479,23 @@ $("#method").on('mouseover', 'option' , function(e) {
                         if( jobselected === '1'){
                          $('#AccountingNotification').removeClass("hidden");
                          $('#AttendanceNotification').addClass("hidden");
+                         $('#BehaviorNotification').addClass("hidden");
                          $('#gradeBook').addClass("hidden");
                        }else if(jobselected === '2'){
                          $('#AttendanceNotification').removeClass("hidden");
                          $('#AccountingNotification').addClass("hidden");
+                         $('#BehaviorNotification').addClass("hidden");
                          $('#gradeBook').addClass("hidden");
                        }else if(jobselected === '3'){
+                         $('#BehaviorNotification').removeClass("hidden");
+                         $('#AccountingNotification').addClass("hidden");
+                         $('#AttendanceNotification').addClass("hidden");
+                         $('#gradeBook').addClass("hidden");
+                       }else if(jobselected === '6'){
                          $('#gradeBook').removeClass("hidden");
                          $('#AccountingNotification').addClass("hidden");
                          $('#AttendanceNotification').addClass("hidden");
+                         $('#BehaviorNotification').addClass("hidden");
                        };
 //                    }
 //                }
@@ -510,6 +522,19 @@ $("#method").on('mouseover', 'option' , function(e) {
 
             }
             $(function () {
+                
+                $("input[name='TimeFrame']").change(function () {
+                   if($('#TimeFrame').is(':checked')) 
+                   { 
+                      $('#TXTdateStart').attr("disabled", false);
+                      $('#TXTdateEnd').attr("disabled", false);
+                   }else{
+                      $('#TXTdateStart').attr("disabled", true);
+                      $('#TXTdateEnd').attr("disabled", true);
+                   }
+                });
+                
+                
                 $('#addObjective').click(function () {
                     $('#formAddobjetive').removeClass("hidden");
                     $('#formAddcontent').addClass("hidden");
@@ -643,7 +668,6 @@ $("#method").on('mouseover', 'option' , function(e) {
                                 </c:forEach>--%>
                             </select>
                         </div>
-
                     </div>
                 </fieldset>
             </form:form>
@@ -682,11 +706,154 @@ $("#method").on('mouseover', 'option' , function(e) {
                             <textarea type="text" class="form-control" name="TXTeditDescriptionObjective" id="editDescriptionObjective"  placeholder="Comments"></textarea>
                         </div>
                         <div class="col-xs-2 center-block form-group paddingLabel">
-                            <input type="button" name="AddObjective" value="Save" class="btn btn-success" id="savedEditObjective" data-target=".bs-example-modal-lg" onclick="saveeditObjective()"/>
-   
+                            <input type="button" name="AddObjective" value="Save" class="btn btn-success" id="savedEditObjective" data-target=".bs-example-modal-lg" onclick="saveeditObjective()"/> 
                         </div>
                 </fieldset>
-                
+                <fieldset class="hidden" id="BehaviorNotification">
+                    <legend>Behavior notification</legend>
+                    
+                        <div class="col-xs-3 center-block form-group">
+                            <label class="control-label">Title Job</label>
+                            <input type="text" class="form-control" name="TXTnamenewobjective" id="titleJob"  placeholder="Name">
+                        </div>
+                    
+                        <div class="col-xs-12 center-block form-group">
+                            <div class="col-xs-3 center-block form-group">
+                                <label class="radio"><input type="radio" name="merit">Demerit</label>
+                                <label class="radio"><input type="radio" name="merit">Merit</label>
+                            </div>
+                            <div class="col-xs-3 center-block form-group">
+                                <label class="radio"><input type="radio" name="event">Single event</label>
+                                <label class="radio"><input type="radio" name="event">Cumulative events</label>
+                            </div>
+                            <div class="col-xs-3 center-block form-group">
+                                <label class="radio"><input type="radio" name="run">Disable</label>
+                                <label class="radio"><input type="radio" name="run">Run daily</label>
+                                <label class="radio"><input type="radio" name="run">Run weekly</label>
+                            </div>
+                            <div class="col-xs-3 center-block form-group">
+                            <label class="control-label">Run at:</label>
+                            <select class="form-control" name="TXTrunAt">
+                                <option value="0">00:00</option>
+                                <option value="1">01:00</option>
+                                <option value="2">02:00</option>
+                                <option value="3">03:00</option>
+                                <option value="4">04:00</option>
+                                <option value="5">05:00</option>
+                                <option value="6">06:00</option>
+                                <option value="7">07:00</option>
+                                <option value="8">08:00</option>
+                                <option value="9">09:00</option>
+                                <option value="10">10:00</option>
+                                <option value="11">11:00</option>
+                                <option value="12">12:00</option>
+                                <option value="13">13:00</option>
+                                <option value="14">14:00</option>
+                                <option value="15">15:00</option>
+                                <option value="16">16:00</option>
+                                <option value="17">17:00</option>
+                                <option value="18">18:00</option>
+                                <option value="19">19:00</option>
+                                <option value="20">20:00</option>
+                                <option value="21">21:00</option>
+                                <option value="22">22:00</option>
+                                <option value="23">23:00</option>
+                                
+                            </select>
+                        </div>
+                        </div>
+                        <div class="col-xs-12 center-block form-group">
+                            <div class="col-xs-4 center-block form-group" style="padding: 0px;">
+                                <label class="control-label">Time Frame</label>
+                                <div class="col-xs-12 table table-bordered">
+                                    <div class="col-xs-6">
+                                        <label class="radio"><input type="radio" name="TimeFrame">Single Day</label>
+                                        <label class="radio"><input type="radio" name="TimeFrame">Current Term</label>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <label class="radio"><input type="radio" name="TimeFrame">Current Semester</label>
+                                        <label class="radio"><input type="radio" name="TimeFrame">Current Year</label>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <label class="radio">
+                                            <input type="radio" name="TimeFrame" id="TimeFrame">Custom Dates
+                                        </label>
+                                        <div class="col-xs-6">
+                                            <div class='input-group date' id='dateStart'>
+                                                <input type='text' name="TXTdateStart" id="TXTdateStart" class="form-control" disabled="true"/>
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class='input-group date' id='dateEnd'>
+                                                <input type='text' name="TXTdateEnd" id="TXTdateEnd" class="form-control" disabled="true"/>
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 center-block form-group">
+                                <label class="control-label">Notification Source</label>
+                                <div class="col-xs-12 table-bordered">
+                                    <div class="col-xs-12">
+                                    <label class="radio"><input type="radio" name="event">Creator of Event</label>
+                                    <label class="radio"><input type="radio" name="event">School representative</label>
+                                    </div>
+                                    <select class="form-control" name="TXTSchoolRepresentative">
+                                        <option value="0">Sabeena</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 center-block form-group">
+                                <label class="control-label">Send Notification to:</label>
+                                <div class="col-xs-12 table-bordered">
+                                    <div class="col-xs-12">
+                                    <label class="checkbox"><input type="checkbox" name="SendNotification">Student</label>
+                                    <label class="checkbox"><input type="checkbox" name="SendNotification">Parent</label>
+                                    <label class="checkbox"><input type="checkbox" name="SendNotification">Advisor</label>
+                                
+                                    <label class="radio">School Representative (email address)</label>
+                                    <input type="text" name="emailSchoolRepresentative">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="col-xs-9 center-block form-group" style="padding-right: 0px;">
+                            <label class="control-label">Notification Message</label>
+                            <textarea type="text" class="form-control" name="NotificationMessage" id="NotificationMessage">
+                                
+                            </textarea>
+                            <script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'NotificationMessage' );
+            </script>
+                        </div>
+                        <div class="col-xs-3 center-block form-group" style="padding-left: 0px;">
+                            <label class="control-label">Variable List</label>
+                            <select multiple="true" size="10" class="form-control" placeholder="">
+                                <option value="${date}">Date</option>
+                                <option value="${description}">Description</option>
+                                <option value="${event}">Event</option>
+                                <option value="${parentName}">Parent Name</option>
+                                <option value="${Stud_firstName}">Student First Name</option>
+                                <option value="${Stud_fullName}">Student Full Name</option>
+                                <option value="${Stud_fullName}">Teacher Name</option>
+                                <option value="${Weight}">Weight</option>
+                            </select>
+                        </div>
+                    
+                        
+                        <div class="col-xs-2 text-center form-group paddingLabel">
+                            <input type="button" name="AddObjective" value="save" class="btn btn-success" id="AddObjective" data-target=".bs-example-modal-lg" onclick="saveaddObjective()"/>
+                        </div>
+                </fieldset>
                 <fieldset class="hidden" id="gradeBook">
                     <legend>Grade book</legend>
                     

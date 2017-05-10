@@ -23,10 +23,15 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/recursos/css/bootstrap-datetimepicker.css"/>"/>
     <link rel="stylesheet" type="text/css" href="<c:url value="/recursos/css/bootstrap-toggle.css"/>"/>
     <link rel="stylesheet" type="text/css" href="<c:url value="/recursos/css/treeJs/default/style.min.css"/>"/>
-
+    <!--        CKEDITOR-->
+    <script type="text/javascript" src="<c:url value="/recursos/js/ckeditor.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/recursos/js/config.js"/>"></script>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/recursos/js/skins/moono-lisa/editor.css" />"/>
+    
     <script type="text/javascript" src="<c:url value="/recursos/js/jquery-2.2.0.js" />"></script>
     <script type="text/javascript" src="<c:url value="/recursos/js/bootstrap.js" />"></script>
     <script type="text/javascript" src="<c:url value="/recursos/js/jquery-ui-1.11.4.custom/jquery-ui.js" />"></script>
+    
     
     <script type="text/javascript" src="<c:url value="/recursos/js/tree/jstree.js" />"></script>
     <script type="text/javascript" src="<c:url value="/recursos/js/tree/jstree.checkbox.js" />"></script>
