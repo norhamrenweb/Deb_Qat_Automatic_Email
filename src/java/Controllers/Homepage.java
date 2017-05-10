@@ -27,7 +27,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Controllers.LessonsListControlador;
+import Controllers.JobsListControlador;
 import Mails.LoginVerification;
 import Mails.User;
 import javax.servlet.http.HttpSession;
@@ -77,7 +77,7 @@ public ModelAndView login(HttpServletRequest hsr, HttpServletResponse hsr1) thro
          scgrpid=login.getSecurityGroupID("MontesoriTest");
          result = login.fromGroup(scgrpid, user.getId());
          if (result == true){
-        ModelAndView mv = new ModelAndView("redirect:/homepage/loadLessons.htm");
+        ModelAndView mv = new ModelAndView("redirect:/homepage/loadJobs.htm");
      String  message = "welcome user";
        session.setAttribute("user", user);
         mv.addObject("message", message);
