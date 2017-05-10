@@ -206,93 +206,93 @@ public class CreateSettingControlador{
         return mv;
     }
 
-    @RequestMapping(value="/createsetting/contentlistObjective.htm")
-    @ResponseBody
-    public String contentlistObjective(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
-        
-//       ModelAndView mv = new ModelAndView("createsettings");
-       List<Content> contents = new ArrayList<>();
-
-      JSONObject obj = new JSONObject();
-      Objective objective = new Objective();
-       try {
-         DriverManagerDataSource dataSource;
-        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
-        this.cn = dataSource.getConnection();
-        
-        
-            
-             Statement st = this.cn.createStatement();
-            //String objectiveid = null;
-            
-                //objectiveid= "1";
-            String objectiveid = hsr.getParameter("seleccion3");
-            
-          ResultSet rs1 = st.executeQuery("SELECT name,id FROM public.content where public.content.id IN (select public.objective_content.content_id from public.objective_content where public.objective_content.objective_id = "+objectiveid+")");
-         
-           while (rs1.next())
-            {
-             String[] ids = new String[1];
-             Content eq = new Content();
-            ids[0] = String.valueOf(rs1.getInt("id"));
-             eq.setId(ids);
-             eq.setName(rs1.getString("name"));
-          
- //    obj.put("name", rs1.getString("name"));
-//       list.add(obj);
-//       System.out.print(list);
-               contents.add(eq);
-            }
-            
+//    @RequestMapping(value="/createsetting/contentlistObjective.htm")
+//    @ResponseBody
+//    public String contentlistObjective(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
+//        
+////       ModelAndView mv = new ModelAndView("createsettings");
+//       List<Content> contents = new ArrayList<>();
+//
+//      JSONObject obj = new JSONObject();
+//      Objective objective = new Objective();
+//       try {
+//         DriverManagerDataSource dataSource;
+//        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
+//        this.cn = dataSource.getConnection();
+//        
+//        
+//            
+//             Statement st = this.cn.createStatement();
+//            //String objectiveid = null;
+//            
+//                //objectiveid= "1";
+//            String objectiveid = hsr.getParameter("seleccion3");
+//            
+//          ResultSet rs1 = st.executeQuery("SELECT name,id FROM public.content where public.content.id IN (select public.objective_content.content_id from public.objective_content where public.objective_content.objective_id = "+objectiveid+")");
+//         
+//           while (rs1.next())
+//            {
+//             String[] ids = new String[1];
+//             Content eq = new Content();
+//            ids[0] = String.valueOf(rs1.getInt("id"));
+//             eq.setId(ids);
+//             eq.setName(rs1.getString("name"));
+//          
+// //    obj.put("name", rs1.getString("name"));
+////       list.add(obj);
+////       System.out.print(list);
+//               contents.add(eq);
+//            }
+//            
+////        } catch (SQLException ex) {
+////            System.out.println("Error leyendo contents: " + ex);
+////        }
+////       Gson gson = new GsonBuilder().setPrettyPrinting().create();
+////       String json = gson.toJson(contents);
+////       hsr1.setContentType("application/json");
+////    
+////		System.out.print(json);
+////      json = json.replaceAll("\n", "");
+////      json = json.trim();
+////      json = json.substring(1,json.length()-1);
+////      json = json.replace("\\","");
+////   String json = JSONObject.escape(obj.toString());
+// //            hsr1.setCharacterEncoding("UTF-8");
+////              hsr1.getWriter().write(json);
+//          
+//        String id = hsr.getParameter("seleccion3");
+// 
+//      
+//        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
+//        this.cn = dataSource.getConnection();
+//              st = this.cn.createStatement();          
+//          ResultSet rs2 = st.executeQuery("SELECT name,description FROM public.objective where id ="+ id);
+//        
+//           while (rs2.next())
+//            {
+//             objective.setName(rs2.getString("name"));
+//             objective.setDescription(rs2.getString("description"));
+// //            objective.setId(id);
+//            }
+//            
 //        } catch (SQLException ex) {
 //            System.out.println("Error leyendo contents: " + ex);
 //        }
-//       Gson gson = new GsonBuilder().setPrettyPrinting().create();
-//       String json = gson.toJson(contents);
-//       hsr1.setContentType("application/json");
-//    
-//		System.out.print(json);
-//      json = json.replaceAll("\n", "");
-//      json = json.trim();
-//      json = json.substring(1,json.length()-1);
-//      json = json.replace("\\","");
-//   String json = JSONObject.escape(obj.toString());
- //            hsr1.setCharacterEncoding("UTF-8");
-//              hsr1.getWriter().write(json);
-          
-        String id = hsr.getParameter("seleccion3");
- 
-      
-        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
-        this.cn = dataSource.getConnection();
-              st = this.cn.createStatement();          
-          ResultSet rs2 = st.executeQuery("SELECT name,description FROM public.objective where id ="+ id);
-        
-           while (rs2.next())
-            {
-             objective.setName(rs2.getString("name"));
-             objective.setDescription(rs2.getString("description"));
- //            objective.setId(id);
-            }
-            
-        } catch (SQLException ex) {
-            System.out.println("Error leyendo contents: " + ex);
-        }
-        
-//      
-                String contentjson = new Gson().toJson(contents);
-                String objjson = new Gson().toJson(objective);
-                obj.put("content",contentjson);
-                obj.put("objective",objjson);
- 
-               
-//            hsr1.setContentType("application/json");
-//            hsr1.setCharacterEncoding("UTF-8");
-//            hsr1.getWriter().write(json);
-//    
-//            mv.addObject(json);
-        return obj.toString();
-    }   
+//        
+////      
+//                String contentjson = new Gson().toJson(contents);
+//                String objjson = new Gson().toJson(objective);
+//                obj.put("content",contentjson);
+//                obj.put("objective",objjson);
+// 
+//               
+////            hsr1.setContentType("application/json");
+////            hsr1.setCharacterEncoding("UTF-8");
+////            hsr1.getWriter().write(json);
+////    
+////            mv.addObject(json);
+//        return obj.toString();
+//    }   
     
     @RequestMapping(value="/createsetting/editObjective.htm")
     @ResponseBody
@@ -405,85 +405,85 @@ public class CreateSettingControlador{
       
          return message;
     }  
-    @RequestMapping(value="/createsetting/addContent.htm")
-    @ResponseBody
-    public String addContent(HttpServletRequest hsr,HttpServletResponse hsr1) throws Exception 
-{
-    String[] input = hsr.getParameterValues("data");
-       JSONObject jsonObj = new JSONObject(input[0]);
-        String message = null;
-        Content c = new Content();
-        try {
-         DriverManagerDataSource dataSource;
-        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
-        this.cn = dataSource.getConnection();
-        Statement st = this.cn.createStatement();
-        String consulta = "insert into content(name,description) values('"+jsonObj.getString("name")+"','"+jsonObj.getString("description")+"')"; 
-        st.executeUpdate(consulta,Statement.RETURN_GENERATED_KEYS);
-        ResultSet rs = st.getGeneratedKeys();
-        String[] id = new String[1];
-        while(rs.next())
-        {
-        
-        id[0]=""+rs.getInt(1);
-        c.setId(id);
-        }
-           
-        c.setDescription(jsonObj.getString("description"));
-        c.setName(jsonObj.getString("name"));
-        consulta = "insert into objective_content(content_id,objective_id) values('"+id[0]+"','"+jsonObj.getString("objid")+"')"; 
-        st.executeUpdate(consulta);
-        message = "Content added successfully";
-        } catch (SQLException ex) {
-            System.out.println("Error leyendo contents: " + ex);
-            message ="Something went wrong";
-        }
-        String cjson = new Gson().toJson(c);
-              
-    //            obj.put("newobjs",objjson);
-  //              obj.put("message",message);
-      
-         return cjson;
-}
-             @RequestMapping(value="/createsetting/editContent.htm")
-    @ResponseBody
-    public String editContent(HttpServletRequest hsr,HttpServletResponse hsr1) throws Exception 
-{
-     List<Content> contents = new ArrayList<>();
-   //   JSONObject obj = new JSONObject();
-       String[] hi = hsr.getParameterValues("data");
-       JSONObject jsonObj = new JSONObject(hi[0]);
-        String message = null;
-        try {
-         DriverManagerDataSource dataSource;
-        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
-        this.cn = dataSource.getConnection();
-        Statement st = this.cn.createStatement();
-        String consulta = "update content set name = '"+jsonObj.getString("name")+"',description ='"+jsonObj.getString("description")+"'where id ="+jsonObj.getString("id"); 
-        st.executeUpdate(consulta);
-        message = "Content edited successfully";   
-          ResultSet rs1 = st.executeQuery("SELECT name,id FROM public.content where public.content.id IN (select public.objective_content.content_id from public.objective_content where public.objective_content.objective_id = "+jsonObj.getString("objid")+")");
-          
-           while (rs1.next())
-            {
-                String[] ids = new String[1];
-             Content eq = new Content();
-            ids[0] = String.valueOf(rs1.getInt("id"));
-             eq.setId(ids);
-             eq.setName(rs1.getString("name"));
-               contents.add(eq);
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error leyendo contents: " + ex);
-            message ="Something went wrong";
-        }
-        String cjson = new Gson().toJson(contents);
-              
-    //            obj.put("newobjs",objjson);
-  //              obj.put("message",message);
-      
-         return cjson;
-}
+//    @RequestMapping(value="/createsetting/addContent.htm")
+//    @ResponseBody
+//    public String addContent(HttpServletRequest hsr,HttpServletResponse hsr1) throws Exception 
+//{
+//    String[] input = hsr.getParameterValues("data");
+//       JSONObject jsonObj = new JSONObject(input[0]);
+//        String message = null;
+//        Content c = new Content();
+//        try {
+//         DriverManagerDataSource dataSource;
+//        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
+//        this.cn = dataSource.getConnection();
+//        Statement st = this.cn.createStatement();
+//        String consulta = "insert into content(name,description) values('"+jsonObj.getString("name")+"','"+jsonObj.getString("description")+"')"; 
+//        st.executeUpdate(consulta,Statement.RETURN_GENERATED_KEYS);
+//        ResultSet rs = st.getGeneratedKeys();
+//        String[] id = new String[1];
+//        while(rs.next())
+//        {
+//        
+//        id[0]=""+rs.getInt(1);
+//        c.setId(id);
+//        }
+//           
+//        c.setDescription(jsonObj.getString("description"));
+//        c.setName(jsonObj.getString("name"));
+//        consulta = "insert into objective_content(content_id,objective_id) values('"+id[0]+"','"+jsonObj.getString("objid")+"')"; 
+//        st.executeUpdate(consulta);
+//        message = "Content added successfully";
+//        } catch (SQLException ex) {
+//            System.out.println("Error leyendo contents: " + ex);
+//            message ="Something went wrong";
+//        }
+//        String cjson = new Gson().toJson(c);
+//              
+//    //            obj.put("newobjs",objjson);
+//  //              obj.put("message",message);
+//      
+//         return cjson;
+//}
+//             @RequestMapping(value="/createsetting/editContent.htm")
+//    @ResponseBody
+//    public String editContent(HttpServletRequest hsr,HttpServletResponse hsr1) throws Exception 
+//{
+//     List<Content> contents = new ArrayList<>();
+//   //   JSONObject obj = new JSONObject();
+//       String[] hi = hsr.getParameterValues("data");
+//       JSONObject jsonObj = new JSONObject(hi[0]);
+//        String message = null;
+//        try {
+//         DriverManagerDataSource dataSource;
+//        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
+//        this.cn = dataSource.getConnection();
+//        Statement st = this.cn.createStatement();
+//        String consulta = "update content set name = '"+jsonObj.getString("name")+"',description ='"+jsonObj.getString("description")+"'where id ="+jsonObj.getString("id"); 
+//        st.executeUpdate(consulta);
+//        message = "Content edited successfully";   
+//          ResultSet rs1 = st.executeQuery("SELECT name,id FROM public.content where public.content.id IN (select public.objective_content.content_id from public.objective_content where public.objective_content.objective_id = "+jsonObj.getString("objid")+")");
+//          
+//           while (rs1.next())
+//            {
+//                String[] ids = new String[1];
+//             Content eq = new Content();
+//            ids[0] = String.valueOf(rs1.getInt("id"));
+//             eq.setId(ids);
+//             eq.setName(rs1.getString("name"));
+//               contents.add(eq);
+//            }
+//        } catch (SQLException ex) {
+//            System.out.println("Error leyendo contents: " + ex);
+//            message ="Something went wrong";
+//        }
+//        String cjson = new Gson().toJson(contents);
+//              
+//    //            obj.put("newobjs",objjson);
+//  //              obj.put("message",message);
+//      
+//         return cjson;
+//}
     @RequestMapping(value="/createsetting/delContent.htm")
     @ResponseBody
     public String delContent(HttpServletRequest hsr,HttpServletResponse hsr1) throws Exception {
