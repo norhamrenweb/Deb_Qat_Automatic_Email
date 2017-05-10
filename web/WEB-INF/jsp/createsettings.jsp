@@ -480,7 +480,7 @@ $("#method").on('mouseover', 'option' , function(e) {
                          $('#AttendanceNotification').removeClass("hidden");
                          $('#AccountingNotification').addClass("hidden");
                          $('#gradeBook').addClass("hidden");
-                       }else if(jobselected === '6'){
+                       }else if(jobselected === '3'){
                          $('#gradeBook').removeClass("hidden");
                          $('#AccountingNotification').addClass("hidden");
                          $('#AttendanceNotification').addClass("hidden");
