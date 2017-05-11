@@ -644,7 +644,6 @@ $(document).ready(function(){
 
 
             <form:form id="formSettings" method ="post" action="createsetting.htm?select=createsetting" >
-
                 <fieldset>
                     <legend>Select type Jobs</legend>
 
@@ -826,7 +825,7 @@ $(document).ready(function(){
                         </div>
                         <div class="col-xs-9 center-block form-group" style="padding-right: 0px;">
                             <label class="control-label">Notification Message</label>
-                            <textarea type="text" class="form-control" name="NotificationMessage" id="NotificationMessage">
+                            <textarea name="NotificationMessage" id="NotificationMessage">
                                 
                             </textarea>
                             <script>

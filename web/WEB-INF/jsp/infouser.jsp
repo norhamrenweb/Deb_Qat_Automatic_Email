@@ -25,8 +25,6 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/recursos/css/treeJs/default/style.min.css"/>"/>
     <!--        CKEDITOR-->
     <script type="text/javascript" src="<c:url value="/recursos/js/ckeditor.js"/>"></script>
-    <script type="text/javascript" src="<c:url value="/recursos/js/config.js"/>"></script>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/recursos/js/skins/moono-lisa/editor.css" />"/>
     
     <script type="text/javascript" src="<c:url value="/recursos/js/jquery-2.2.0.js" />"></script>
     <script type="text/javascript" src="<c:url value="/recursos/js/bootstrap.js" />"></script>
