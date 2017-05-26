@@ -69,142 +69,108 @@ public class CreateSettingControlador{
         this.cn = dataSource.getConnection();
         Statement st = this.cn.createStatement();
         ResultSet rs = st.executeQuery("SELECT GradeLevel,GradeLevelID FROM AH_ZAF.dbo.GradeLevels");
-        List <Level> grades = new ArrayList();
-        Level l = new Level();
-        l.setName("Select level");
-        String[] y = new String[1];
-             y[0]="?";
-           l.setId(y);
-        grades.add(l);
-        while(rs.next())
-        {
-            Level x = new Level();
-             String[] ids = new String[1];
-             ids[0]=""+rs.getInt("GradeLevelID");
-            x.setId(ids);
-            x.setName(rs.getString("GradeLevel"));
-        grades.add(x);
-        }
-         DriverManagerDataSource dataSource2;
-        dataSource2 = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
-        this.cn = dataSource2.getConnection();
-         Statement st2 = this.cn.createStatement();
-        ResultSet rs1 = st2.executeQuery("SELECT * FROM public.method");
-        List <Method> methods = new ArrayList();
-        while(rs1.next())
-        {
-            Method x = new Method();
-             String[] ids = new String[1];
-             ids[0]=""+rs1.getInt("id");
-            x.setId(ids);
-            x.setName(rs1.getString("name"));
-            x.setDescription(rs1.getString("description"));
-        methods.add(x);
-        }
-          
-            mv.addObject("methods",methods);
-            mv.addObject("gradelevels", grades);
+      
         
         return mv;
     }
 
-   @RequestMapping("/createsetting/subjectlistLevel.htm")
-   
-    public ModelAndView subjectlistLevel(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
-        
-        ModelAndView mv = new ModelAndView("createsettings");
-        List<Subject> subjects = new ArrayList<>();
-       try {
-         DriverManagerDataSource dataSource;
-        dataSource = (DriverManagerDataSource)this.getBean("dataSourceAH",hsr.getServletContext());
-        this.cn = dataSource.getConnection();
-        
-        
-            
-             Statement st = this.cn.createStatement();
-             String[] levelid = new String[1];
-            dataSource = (DriverManagerDataSource)this.getBean("dataSourceAH",hsr.getServletContext());
-             this.cn = dataSource.getConnection();
-             st = this.cn.createStatement();
-             levelid= hsr.getParameterValues("seleccion1");
-          ResultSet rs1 = st.executeQuery("select CourseID from Course_GradeLevel where GradeLevel IN (select GradeLevel from GradeLevels where GradeLevelID ="+levelid[0]+")");
-//           Subject s = new Subject();
-//          s.setName("Select Subject");
-//          subjects.add(s);
-           
-           while (rs1.next())
-            {
-             Subject sub = new Subject();
-             String[] ids = new String[1];
-            ids[0]=""+rs1.getInt("CourseID");
-             sub.setId(ids);
-            
-                subjects.add(sub);
-            }
-           for(Subject su:subjects.subList(1,subjects.size()))
-          {
-              String[] ids = new String[1];
-              ids=su.getId();
-           ResultSet rs2 = st.executeQuery("select Title from Courses where CourseID = "+ids[0]);
-           while(rs2.next())
-           {
-           su.setName(rs2.getString("Title"));
-           }
-          }
-            
-        } catch (SQLException ex) {
-            System.out.println("Error leyendo Subjects: " + ex);
-        }
-        
-        
-         mv.addObject("subjects", subjects);
-        
-        return mv;
-    }
-    @RequestMapping("/createsetting/objectivelistSubject.htm")
-    public ModelAndView objectivelistSubject(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
-        
-     ModelAndView mv = new ModelAndView("createsettings");
-        List<Objective> objectives = new ArrayList<>();
-       try {
-         DriverManagerDataSource dataSource;
-        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
-        this.cn = dataSource.getConnection();
-        
-        
-            
-             Statement st = this.cn.createStatement();
-             String subjectid = null;
-          
-            
-                subjectid = hsr.getParameter("seleccion2");
-            
-            
-          ResultSet rs1 = st.executeQuery("select name,id from public.objective where subject_id="+subjectid);
-//          Objective s = new Objective();
-//          s.setName("Select Objective");
-//          objectives.add(s);
-           
-           while (rs1.next())
-            {
-             String[] ids = new String[1];
-                Objective sub = new Objective();
-            ids[0] = ""+rs1.getInt("id");
-             sub.setId(ids);
-             sub.setName(rs1.getString("name"));
-                objectives.add(sub);
-            }
-          
-            
-        } catch (SQLException ex) {
-            System.out.println("Error leyendo Objectives: " + ex);
-        }
-        
-        mv.addObject("templatessubsection", hsr.getParameter("seleccion2"));
-        mv.addObject("objectives", objectives);
-        
-        return mv;
-    }
+//   @RequestMapping("/createsetting/subjectlistLevel.htm")
+//   
+//    public ModelAndView subjectlistLevel(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
+//        
+//        ModelAndView mv = new ModelAndView("createsettings");
+//        List<Subject> subjects = new ArrayList<>();
+//       try {
+//         DriverManagerDataSource dataSource;
+//        dataSource = (DriverManagerDataSource)this.getBean("dataSourceAH",hsr.getServletContext());
+//        this.cn = dataSource.getConnection();
+//        
+//        
+//            
+//             Statement st = this.cn.createStatement();
+//             String[] levelid = new String[1];
+//            dataSource = (DriverManagerDataSource)this.getBean("dataSourceAH",hsr.getServletContext());
+//             this.cn = dataSource.getConnection();
+//             st = this.cn.createStatement();
+//             levelid= hsr.getParameterValues("seleccion1");
+//          ResultSet rs1 = st.executeQuery("select CourseID from Course_GradeLevel where GradeLevel IN (select GradeLevel from GradeLevels where GradeLevelID ="+levelid[0]+")");
+////           Subject s = new Subject();
+////          s.setName("Select Subject");
+////          subjects.add(s);
+//           
+//           while (rs1.next())
+//            {
+//             Subject sub = new Subject();
+//             String[] ids = new String[1];
+//            ids[0]=""+rs1.getInt("CourseID");
+//             sub.setId(ids);
+//            
+//                subjects.add(sub);
+//            }
+//           for(Subject su:subjects.subList(1,subjects.size()))
+//          {
+//              String[] ids = new String[1];
+//              ids=su.getId();
+//           ResultSet rs2 = st.executeQuery("select Title from Courses where CourseID = "+ids[0]);
+//           while(rs2.next())
+//           {
+//           su.setName(rs2.getString("Title"));
+//           }
+//          }
+//            
+//        } catch (SQLException ex) {
+//            System.out.println("Error leyendo Subjects: " + ex);
+//        }
+//        
+//        
+//         mv.addObject("subjects", subjects);
+//        
+//        return mv;
+//    }
+//    @RequestMapping("/createsetting/objectivelistSubject.htm")
+//    public ModelAndView objectivelistSubject(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
+//        
+//     ModelAndView mv = new ModelAndView("createsettings");
+//        List<Objective> objectives = new ArrayList<>();
+//       try {
+//         DriverManagerDataSource dataSource;
+//        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
+//        this.cn = dataSource.getConnection();
+//        
+//        
+//            
+//             Statement st = this.cn.createStatement();
+//             String subjectid = null;
+//          
+//            
+//                subjectid = hsr.getParameter("seleccion2");
+//            
+//            
+//          ResultSet rs1 = st.executeQuery("select name,id from public.objective where subject_id="+subjectid);
+////          Objective s = new Objective();
+////          s.setName("Select Objective");
+////          objectives.add(s);
+//           
+//           while (rs1.next())
+//            {
+//             String[] ids = new String[1];
+//                Objective sub = new Objective();
+//            ids[0] = ""+rs1.getInt("id");
+//             sub.setId(ids);
+//             sub.setName(rs1.getString("name"));
+//                objectives.add(sub);
+//            }
+//          
+//            
+//        } catch (SQLException ex) {
+//            System.out.println("Error leyendo Objectives: " + ex);
+//        }
+//        
+//        mv.addObject("templatessubsection", hsr.getParameter("seleccion2"));
+//        mv.addObject("objectives", objectives);
+//        
+//        return mv;
+//    }
 
 //    @RequestMapping(value="/createsetting/contentlistObjective.htm")
 //    @ResponseBody
@@ -294,117 +260,117 @@ public class CreateSettingControlador{
 //        return obj.toString();
 //    }   
     
-    @RequestMapping(value="/createsetting/editObjective.htm")
-    @ResponseBody
-    public String editObjective(HttpServletRequest hsr,HttpServletResponse hsr1) throws Exception {
-        List<Objective> objectives = new ArrayList<>();
-   //   JSONObject obj = new JSONObject();
-       String[] hi = hsr.getParameterValues("data");
-       JSONObject jsonObj = new JSONObject(hi[0]);
-        String message = null;
-        try {
-         DriverManagerDataSource dataSource;
-        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
-        this.cn = dataSource.getConnection();
-        Statement st = this.cn.createStatement();
-        String consulta = "update objective set name = '"+jsonObj.getString("name")+"',description ='"+jsonObj.getString("description")+"'where id ="+jsonObj.getString("id"); 
-        st.executeUpdate(consulta);
-        message = "Objective edited successfully";   
-        ResultSet rs = st.executeQuery("select * from objective where subject_id = "+jsonObj.getString("subjectid"));
-        while(rs.next()){
-        Objective o = new Objective();
-        o.setDescription(rs.getString("description"));
-        String[] id = new String[1];
-        id[0]=""+rs.getInt("id");
-        o.setId(id);
-        o.setName(rs.getString("name"));
-        objectives.add(o);
-        }
-        } catch (SQLException ex) {
-            System.out.println("Error leyendo contents: " + ex);
-            message ="Something went wrong";
-        }
-        String objjson = new Gson().toJson(objectives);
-              
-    //            obj.put("newobjs",objjson);
-  //              obj.put("message",message);
-      
-         return objjson;
-    }     
-    @RequestMapping(value="/createsetting/addObjective.htm")
-    @ResponseBody
-    public String addObjective(HttpServletRequest hsr,HttpServletResponse hsr1) throws Exception {
-     
-       String[] input = hsr.getParameterValues("data");
-       JSONObject jsonObj = new JSONObject(input[0]);
-        String message = null;
-        Objective o = new Objective();
-        try {
-         DriverManagerDataSource dataSource;
-        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
-        this.cn = dataSource.getConnection();
-        Statement st = this.cn.createStatement();
-        String consulta = "insert into objective(name,description,subject_id) values('"+jsonObj.getString("name")+"','"+jsonObj.getString("description")+"','"+jsonObj.getString("subjectid")+"')"; 
-        st.executeUpdate(consulta,Statement.RETURN_GENERATED_KEYS);
-        ResultSet rs = st.getGeneratedKeys();
-       
-        while(rs.next())
-        {
-         String[] id = new String[1];
-        id[0]=""+rs.getInt(1);
-        o.setId(id);
-        }
-        message = "Objective added successfully";   
-        o.setDescription(jsonObj.getString("description"));
-        o.setName(jsonObj.getString("name"));
-       
-        
-        } catch (SQLException ex) {
-            System.out.println("Error leyendo contents: " + ex);
-            message ="Something went wrong";
-        }
-        String objjson = new Gson().toJson(o);
-              
-    //            obj.put("newobjs",objjson);
-  //              obj.put("message",message);
-      
-         return objjson;
-    }  
-    @RequestMapping(value="/createsetting/delObjective.htm")
-    @ResponseBody
-    public String delObjective(HttpServletRequest hsr,HttpServletResponse hsr1) throws Exception {
-     
-        String message = null;
-       String[] id = hsr.getParameterValues("id");
-     
-       try {
-        DriverManagerDataSource dataSource;
-        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
-        this.cn = dataSource.getConnection();
-         Statement st = this.cn.createStatement();
-         String consulta = "select name from lessons where objective_id = "+ id[0];
-          ResultSet rs = st.executeQuery(consulta );
-          if(rs.next()){
-            message="This objective is linked to lessons";  
-          }
-          else{
-        consulta = "DELETE FROM public.objective WHERE id="+id[0];
-           st.executeUpdate(consulta);
-           consulta="delete from objective_content where objective_id= '"+id[0]+"'";
-           st.executeUpdate(consulta);
-           message="success";
-           // need to decide what to do with the contents also if the objective has a record in the progress_report
-          }
-       }catch (SQLException ex) {
-            System.out.println("Error : " + ex);
-        }
-     
-              
-    //            obj.put("newobjs",objjson);
-  //              obj.put("message",message);
-      
-         return message;
-    }  
+//    @RequestMapping(value="/createsetting/editObjective.htm")
+//    @ResponseBody
+//    public String editObjective(HttpServletRequest hsr,HttpServletResponse hsr1) throws Exception {
+//        List<Objective> objectives = new ArrayList<>();
+//   //   JSONObject obj = new JSONObject();
+//       String[] hi = hsr.getParameterValues("data");
+//       JSONObject jsonObj = new JSONObject(hi[0]);
+//        String message = null;
+//        try {
+//         DriverManagerDataSource dataSource;
+//        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
+//        this.cn = dataSource.getConnection();
+//        Statement st = this.cn.createStatement();
+//        String consulta = "update objective set name = '"+jsonObj.getString("name")+"',description ='"+jsonObj.getString("description")+"'where id ="+jsonObj.getString("id"); 
+//        st.executeUpdate(consulta);
+//        message = "Objective edited successfully";   
+//        ResultSet rs = st.executeQuery("select * from objective where subject_id = "+jsonObj.getString("subjectid"));
+//        while(rs.next()){
+//        Objective o = new Objective();
+//        o.setDescription(rs.getString("description"));
+//        String[] id = new String[1];
+//        id[0]=""+rs.getInt("id");
+//        o.setId(id);
+//        o.setName(rs.getString("name"));
+//        objectives.add(o);
+//        }
+//        } catch (SQLException ex) {
+//            System.out.println("Error leyendo contents: " + ex);
+//            message ="Something went wrong";
+//        }
+//        String objjson = new Gson().toJson(objectives);
+//              
+//    //            obj.put("newobjs",objjson);
+//  //              obj.put("message",message);
+//      
+//         return objjson;
+//    }     
+//    @RequestMapping(value="/createsetting/addObjective.htm")
+//    @ResponseBody
+//    public String addObjective(HttpServletRequest hsr,HttpServletResponse hsr1) throws Exception {
+//     
+//       String[] input = hsr.getParameterValues("data");
+//       JSONObject jsonObj = new JSONObject(input[0]);
+//        String message = null;
+//        Objective o = new Objective();
+//        try {
+//         DriverManagerDataSource dataSource;
+//        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
+//        this.cn = dataSource.getConnection();
+//        Statement st = this.cn.createStatement();
+//        String consulta = "insert into objective(name,description,subject_id) values('"+jsonObj.getString("name")+"','"+jsonObj.getString("description")+"','"+jsonObj.getString("subjectid")+"')"; 
+//        st.executeUpdate(consulta,Statement.RETURN_GENERATED_KEYS);
+//        ResultSet rs = st.getGeneratedKeys();
+//       
+//        while(rs.next())
+//        {
+//         String[] id = new String[1];
+//        id[0]=""+rs.getInt(1);
+//        o.setId(id);
+//        }
+//        message = "Objective added successfully";   
+//        o.setDescription(jsonObj.getString("description"));
+//        o.setName(jsonObj.getString("name"));
+//       
+//        
+//        } catch (SQLException ex) {
+//            System.out.println("Error leyendo contents: " + ex);
+//            message ="Something went wrong";
+//        }
+//        String objjson = new Gson().toJson(o);
+//              
+//    //            obj.put("newobjs",objjson);
+//  //              obj.put("message",message);
+//      
+//         return objjson;
+//    }  
+//    @RequestMapping(value="/createsetting/delObjective.htm")
+//    @ResponseBody
+//    public String delObjective(HttpServletRequest hsr,HttpServletResponse hsr1) throws Exception {
+//     
+//        String message = null;
+//       String[] id = hsr.getParameterValues("id");
+//     
+//       try {
+//        DriverManagerDataSource dataSource;
+//        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
+//        this.cn = dataSource.getConnection();
+//         Statement st = this.cn.createStatement();
+//         String consulta = "select name from lessons where objective_id = "+ id[0];
+//          ResultSet rs = st.executeQuery(consulta );
+//          if(rs.next()){
+//            message="This objective is linked to lessons";  
+//          }
+//          else{
+//        consulta = "DELETE FROM public.objective WHERE id="+id[0];
+//           st.executeUpdate(consulta);
+//           consulta="delete from objective_content where objective_id= '"+id[0]+"'";
+//           st.executeUpdate(consulta);
+//           message="success";
+//           // need to decide what to do with the contents also if the objective has a record in the progress_report
+//          }
+//       }catch (SQLException ex) {
+//            System.out.println("Error : " + ex);
+//        }
+//     
+//              
+//    //            obj.put("newobjs",objjson);
+//  //              obj.put("message",message);
+//      
+//         return message;
+//    }  
 //    @RequestMapping(value="/createsetting/addContent.htm")
 //    @ResponseBody
 //    public String addContent(HttpServletRequest hsr,HttpServletResponse hsr1) throws Exception 
@@ -484,152 +450,152 @@ public class CreateSettingControlador{
 //      
 //         return cjson;
 //}
-    @RequestMapping(value="/createsetting/delContent.htm")
-    @ResponseBody
-    public String delContent(HttpServletRequest hsr,HttpServletResponse hsr1) throws Exception {
-     
-        String message = null;
-       String[] id = hsr.getParameterValues("id");
-     
-       try {
-        DriverManagerDataSource dataSource;
-        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
-        this.cn = dataSource.getConnection();
-         Statement st = this.cn.createStatement();
-         String consulta = "select lesson_id from lesson_content where content_id = "+ id[0];
-          ResultSet rs = st.executeQuery(consulta );
-          if(rs.next()){
-            message="This content is linked to lessons";  
-          }
-          else{
-        consulta = "DELETE FROM objective_content WHERE content_id="+id[0];
-           st.executeUpdate(consulta);
-           consulta = "DELETE FROM content WHERE id="+id[0];
-           st.executeUpdate(consulta);
-           message="success";
-          
-          }
-       }catch (SQLException ex) {
-            System.out.println("Error : " + ex);
-            message = "Something went wrong";
-        }
-     
-              
-    //            obj.put("newobjs",objjson);
-  //              obj.put("message",message);
-      
-         return message;
-    } 
-    @RequestMapping(value="/createsetting/delMethod.htm")
-    @ResponseBody
-    public String delMethod(HttpServletRequest hsr,HttpServletResponse hsr1) throws Exception {
-     
-        String message = null;
-       String[] id = hsr.getParameterValues("id");
-     
-       try {
-        DriverManagerDataSource dataSource;
-        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
-        this.cn = dataSource.getConnection();
-         Statement st = this.cn.createStatement();
-         String consulta = "select id from lessons where method_id = "+ id[0];
-          ResultSet rs = st.executeQuery(consulta );
-          if(rs.next()){
-            message="This method is linked to lessons";  
-          }
-          else{
-        consulta = "DELETE FROM method WHERE id="+id[0];
-           st.executeUpdate(consulta);
-           message="success";
-          
-          }
-       }catch (SQLException ex) {
-            System.out.println("Error : " + ex);
-            message = "Something went wrong";
-        }
-     
-              
-    //            obj.put("newobjs",objjson);
-  //              obj.put("message",message);
-      
-         return message;
-    } 
-        @RequestMapping(value="/createsetting/addMethod.htm")
-    @ResponseBody
-    public String addMethod(HttpServletRequest hsr,HttpServletResponse hsr1) throws Exception {
-     
-       String[] input = hsr.getParameterValues("data");
-       JSONObject jsonObj = new JSONObject(input[0]);
-        String message = null;
-        Method m = new Method();
-        try {
-         DriverManagerDataSource dataSource;
-        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
-        this.cn = dataSource.getConnection();
-        Statement st = this.cn.createStatement();
-        String consulta = "insert into method(name,description) values('"+jsonObj.getString("name")+"','"+jsonObj.getString("description")+"')"; 
-        st.executeUpdate(consulta,Statement.RETURN_GENERATED_KEYS);
-        ResultSet rs = st.getGeneratedKeys();
-       
-        while(rs.next())
-        {
-         String[] id = new String[1];
-        id[0]=""+rs.getInt(1);
-        m.setId(id);
-        }
-        message = "Method added successfully";   
-        m.setDescription(jsonObj.getString("description"));
-        m.setName(jsonObj.getString("name"));
-       
-        
-        } catch (SQLException ex) {
-            System.out.println("Error leyendo contents: " + ex);
-            message ="Something went wrong";
-        }
-        String objjson = new Gson().toJson(m);
-              
-    //            obj.put("newobjs",objjson);
-  //              obj.put("message",message);
-      
-         return objjson;
-    }          
-@RequestMapping(value="/createsetting/editMethod.htm")
-    @ResponseBody
-    public String editMethod(HttpServletRequest hsr,HttpServletResponse hsr1) throws Exception {
-        List<Method> methods = new ArrayList<>();
-   //   JSONObject obj = new JSONObject();
-       String[] hi = hsr.getParameterValues("data");
-       JSONObject jsonObj = new JSONObject(hi[0]);
-        String message = null;
-        try {
-         DriverManagerDataSource dataSource;
-        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
-        this.cn = dataSource.getConnection();
-        Statement st = this.cn.createStatement();
-        String consulta = "update method set name = '"+jsonObj.getString("name")+"',description ='"+jsonObj.getString("description")+"'where id ="+jsonObj.getString("id"); 
-        st.executeUpdate(consulta);
-        message = "Objective edited successfully";   
-        ResultSet rs = st.executeQuery("select * from method ");
-        while(rs.next()){
-        Method m = new Method();
-        m.setDescription(rs.getString("description"));
-        String[] id = new String[1];
-        id[0]=""+rs.getInt("id");
-        m.setId(id);
-        m.setName(rs.getString("name"));
-        methods.add(m);
-        }
-        } catch (SQLException ex) {
-            System.out.println("Error leyendo contents: " + ex);
-            message ="Something went wrong";
-        }
-        String objjson = new Gson().toJson(methods);
-              
-    //            obj.put("newobjs",objjson);
-  //              obj.put("message",message);
-      
-         return objjson;
-    }     
+//    @RequestMapping(value="/createsetting/delContent.htm")
+//    @ResponseBody
+//    public String delContent(HttpServletRequest hsr,HttpServletResponse hsr1) throws Exception {
+//     
+//        String message = null;
+//       String[] id = hsr.getParameterValues("id");
+//     
+//       try {
+//        DriverManagerDataSource dataSource;
+//        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
+//        this.cn = dataSource.getConnection();
+//         Statement st = this.cn.createStatement();
+//         String consulta = "select lesson_id from lesson_content where content_id = "+ id[0];
+//          ResultSet rs = st.executeQuery(consulta );
+//          if(rs.next()){
+//            message="This content is linked to lessons";  
+//          }
+//          else{
+//        consulta = "DELETE FROM objective_content WHERE content_id="+id[0];
+//           st.executeUpdate(consulta);
+//           consulta = "DELETE FROM content WHERE id="+id[0];
+//           st.executeUpdate(consulta);
+//           message="success";
+//          
+//          }
+//       }catch (SQLException ex) {
+//            System.out.println("Error : " + ex);
+//            message = "Something went wrong";
+//        }
+//     
+//              
+//    //            obj.put("newobjs",objjson);
+//  //              obj.put("message",message);
+//      
+//         return message;
+//    } 
+//    @RequestMapping(value="/createsetting/delMethod.htm")
+//    @ResponseBody
+//    public String delMethod(HttpServletRequest hsr,HttpServletResponse hsr1) throws Exception {
+//     
+//        String message = null;
+//       String[] id = hsr.getParameterValues("id");
+//     
+//       try {
+//        DriverManagerDataSource dataSource;
+//        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
+//        this.cn = dataSource.getConnection();
+//         Statement st = this.cn.createStatement();
+//         String consulta = "select id from lessons where method_id = "+ id[0];
+//          ResultSet rs = st.executeQuery(consulta );
+//          if(rs.next()){
+//            message="This method is linked to lessons";  
+//          }
+//          else{
+//        consulta = "DELETE FROM method WHERE id="+id[0];
+//           st.executeUpdate(consulta);
+//           message="success";
+//          
+//          }
+//       }catch (SQLException ex) {
+//            System.out.println("Error : " + ex);
+//            message = "Something went wrong";
+//        }
+//     
+//              
+//    //            obj.put("newobjs",objjson);
+//  //              obj.put("message",message);
+//      
+//         return message;
+//    } 
+//        @RequestMapping(value="/createsetting/addMethod.htm")
+//    @ResponseBody
+//    public String addMethod(HttpServletRequest hsr,HttpServletResponse hsr1) throws Exception {
+//     
+//       String[] input = hsr.getParameterValues("data");
+//       JSONObject jsonObj = new JSONObject(input[0]);
+//        String message = null;
+//        Method m = new Method();
+//        try {
+//         DriverManagerDataSource dataSource;
+//        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
+//        this.cn = dataSource.getConnection();
+//        Statement st = this.cn.createStatement();
+//        String consulta = "insert into method(name,description) values('"+jsonObj.getString("name")+"','"+jsonObj.getString("description")+"')"; 
+//        st.executeUpdate(consulta,Statement.RETURN_GENERATED_KEYS);
+//        ResultSet rs = st.getGeneratedKeys();
+//       
+//        while(rs.next())
+//        {
+//         String[] id = new String[1];
+//        id[0]=""+rs.getInt(1);
+//        m.setId(id);
+//        }
+//        message = "Method added successfully";   
+//        m.setDescription(jsonObj.getString("description"));
+//        m.setName(jsonObj.getString("name"));
+//       
+//        
+//        } catch (SQLException ex) {
+//            System.out.println("Error leyendo contents: " + ex);
+//            message ="Something went wrong";
+//        }
+//        String objjson = new Gson().toJson(m);
+//              
+//    //            obj.put("newobjs",objjson);
+//  //              obj.put("message",message);
+//      
+//         return objjson;
+//    }          
+//@RequestMapping(value="/createsetting/editMethod.htm")
+//    @ResponseBody
+//    public String editMethod(HttpServletRequest hsr,HttpServletResponse hsr1) throws Exception {
+//        List<Method> methods = new ArrayList<>();
+//   //   JSONObject obj = new JSONObject();
+//       String[] hi = hsr.getParameterValues("data");
+//       JSONObject jsonObj = new JSONObject(hi[0]);
+//        String message = null;
+//        try {
+//         DriverManagerDataSource dataSource;
+//        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
+//        this.cn = dataSource.getConnection();
+//        Statement st = this.cn.createStatement();
+//        String consulta = "update method set name = '"+jsonObj.getString("name")+"',description ='"+jsonObj.getString("description")+"'where id ="+jsonObj.getString("id"); 
+//        st.executeUpdate(consulta);
+//        message = "Objective edited successfully";   
+//        ResultSet rs = st.executeQuery("select * from method ");
+//        while(rs.next()){
+//        Method m = new Method();
+//        m.setDescription(rs.getString("description"));
+//        String[] id = new String[1];
+//        id[0]=""+rs.getInt("id");
+//        m.setId(id);
+//        m.setName(rs.getString("name"));
+//        methods.add(m);
+//        }
+//        } catch (SQLException ex) {
+//            System.out.println("Error leyendo contents: " + ex);
+//            message ="Something went wrong";
+//        }
+//        String objjson = new Gson().toJson(methods);
+//              
+//    //            obj.put("newobjs",objjson);
+//  //              obj.put("message",message);
+//      
+//         return objjson;
+//    }     
 
 
 }
