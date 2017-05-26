@@ -244,6 +244,7 @@ var ajax;
         {
             background-color: #CC6666;
         }
+
     </style>
     </head>
     <body>
@@ -291,6 +292,7 @@ var ajax;
             </table>
            
             </div>
+            
         </div>
 <!-- Modal delete-->
 <div id="detailsLesson" class="modal fade" role="dialog">
