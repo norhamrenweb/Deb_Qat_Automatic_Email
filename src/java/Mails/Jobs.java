@@ -16,10 +16,86 @@ public class Jobs {
     private String name;
     private String message;
     private String messagetitle;
-   private String type;
-    private String runtime;
+   private String type;//behavior,gradebook,admission
+    private String runtime;//daily,weekly,once
     private String lastrun;
     private int userid;
+    private String category;//merit,demerit
+    private String setting;//any other setting  like single or cumulative event
+    private String sender;
+    private String cc;
+    private String description;
+    private String start;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    private String runhour;
+    private String TFstart;
+    private String TFfinish;
+    private String status;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getSetting() {
+        return setting;
+    }
+
+    public void setSetting(String setting) {
+        this.setting = setting;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
+    public String getCc() {
+        return cc;
+    }
+
+    public void setCc(String cc) {
+        this.cc = cc;
+    }
+
+    public String getRunhour() {
+        return runhour;
+    }
+
+    public void setRunhour(String runhour) {
+        this.runhour = runhour;
+    }
+
+    public String getTFstart() {
+        return TFstart;
+    }
+
+    public void setTFstart(String TFstart) {
+        this.TFstart = TFstart;
+    }
+
+    public String getTFfinish() {
+        return TFfinish;
+    }
+
+    public void setTFfinish(String TFfinish) {
+        this.TFfinish = TFfinish;
+    }
+ 
+    
 
     public String getLastrun() {
         return lastrun;
@@ -28,8 +104,7 @@ public class Jobs {
     public void setLastrun(String lastrun) {
         this.lastrun = lastrun;
     }
-    private String description;
-    private String start;
+    
 
     public String getType() {
         return type;
