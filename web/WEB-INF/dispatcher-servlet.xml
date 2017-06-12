@@ -54,6 +54,7 @@
     <bean class="Controllers.CreateSettingControlador" id="createsetting"/>
 <!--    <bean class="Controllers.CreateLessonControlador" id="createlesson"/>-->
     <bean class="Controllers.JobsListControlador" id="lessonsList"/>
+     <bean class="Controllers.ReportControlador" id="report"/>
 <!--    <bean class="Controllers.ProgressControlador" id="lessonprogress"/>-->
 <!--    <bean class="Controllers.LessonIdeaControlador" id="lessonidea"/>
     <bean class="Controllers.EditLessonControlador" id="editlesson"/>-->
@@ -125,6 +126,7 @@
                 
                 <prop key="datosIdioma.htm">ControladorIdioma</prop>
                 <prop key="homepage.htm">lessonsList</prop>
+                <prop key="report.htm">report</prop>
  <!--               <prop key="lessonprogress.htm">lessonprogress</prop>
                 <prop key="progressbystudent.htm">studentprog</prop>  
                 <prop key="progressdetails.htm">studentprog</prop>

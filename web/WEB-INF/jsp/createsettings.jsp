@@ -247,25 +247,40 @@ $(document).ready(function(){
             {
 
      //   var seleccion = document.getElementById("objective").value;
-        var name = document.getElementById("namenewobjective").value;
-        var description = document.getElementById("descriptionnewobjective").value;
-        var subjectid = document.getElementById("subject").value;
+        var name = document.getElementById("titleJobBN").value;
+        var type = document.getElementById("typeJob").value;
+        var message = CKEDITOR.instances.NotificationMessage.getData();
+        var messagetitle = document.getElementById("messagetitleBN").value;
+        var runfreq =$("input[name='runBN']:checked").val();
+        var setting = $("input[name='meritBN']:checked").val();
+        var test = $("input[name='eventBN']:checked").val();
+        var sender;
+        if(test==='rep')
+        {
+            sender = document.getElementById("schoolRep").value;
+        }
+        else
+        {
+           sender = 'creator'; 
+        }
         var myObj = {};
                 myObj["name"] = name;
-                myObj["description"] = description;
-    //            myObj["id"] = seleccion;
-                myObj["subjectid"] = subjectid;
+                myObj["type"] = type;
+                myObj["runfreq"] = runfreq;
+                myObj["message"] = message;
+                myObj["messagetitle"] = messagetitle;
+                myObj["setting"] = setting;
+                myObj["sender"] = sender;
                 var json = JSON.stringify(myObj);
             $.ajax({
                     type: 'POST',
-                        url: 'addObjective.htm?data='+json,
+                        url: 'save.htm',
                         data: json,
-                        dataType: 'text' ,           
+                       datatype:"json",
+                        contentType: "application/json",          
                      
                         success: function(data) {                          
-                            var json = JSON.parse(data);                               
-                        $('#objective').append('<option value = "'+json.id[0]+'" >' + json.name + '</option>');
-                        $('#formAddobjetive').addClass("hidden");               
+                                   
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
                                 console.log(xhr.status);
@@ -654,7 +669,7 @@ $(document).ready(function(){
                                 <option value="0" >Select type</option>
                                 <option value="1" >Accounting notification</option>
                                 <option value="2" >Attendance notification</option>
-                                <option value="3" >Behavior notification</option>
+                                <option value="3" >Behaviour notification</option>
                                 <option value="4" >Create day attendance</option>
                                 <option value="5" >Custom maintenance Job</option>
                                 <option value="6" >Grade book</option>
@@ -675,8 +690,12 @@ $(document).ready(function(){
                     <legend>Accounting Notification</legend>
 
                         <div class="col-xs-3 center-block form-group" id="addObjective">
-                            <label class="control-label">Title job</label>
-                            <input type="text" class="form-control" name="TXTnamenewobjective" id="namenewobjective"  placeholder="Name">
+                            <label class="control-label">Job title</label>
+                            <input type="text" class="form-control" name="TXTnamenewobjective" id="titleJob"  placeholder="Name">
+                        </div>
+                    <div class="col-xs-3 center-block form-group" id="messageTitle">
+                            <label class="control-label">Message title</label>
+                            <input type="text" class="form-control" name="TXTnamenewmessage" id="messagetitle"  placeholder="Name">
                         </div>
                         <div class="col-xs-12 center-block form-group">
                             <label class="control-label">Notification Message</label>
@@ -713,25 +732,28 @@ $(document).ready(function(){
                     
                         <div class="col-xs-3 center-block form-group">
                             <label class="control-label">Title Job</label>
-                            <input type="text" class="form-control" name="TXTnamenewobjective" id="titleJob"  placeholder="Name">
+                            <input type="text" class="form-control" name="TXTnamenewobjective" id="titleJobBN"  placeholder="Name">
                         </div>
-                    
+                    <div class="col-xs-3 center-block form-group" id="messageTitle">
+                            <label class="control-label">Message title</label>
+                            <input type="text" class="form-control" name="TXTnamenewmessage" id="messagetitleBN"  placeholder="Name">
+                        </div>
                         <div class="col-xs-12 center-block form-group">
                             <div class="col-xs-3 center-block form-group">
-                                <label class="radio"><input type="radio" name="merit">Demerit</label>
-                                <label class="radio"><input type="radio" name="merit">Merit</label>
+                                <label class="radio"><input type="radio" name="meritBN" value="demerit">Demerit</label>
+                                <label class="radio"><input type="radio" name="meritBN" value="merit">Merit</label>
                             </div>
-                            <div class="col-xs-3 center-block form-group">
+<!--                            <div class="col-xs-3 center-block form-group">
                                 <label class="radio"><input type="radio" name="event">Single event</label>
                                 <label class="radio"><input type="radio" name="event">Cumulative events</label>
+                            </div>-->
+                            <div class="col-xs-3 center-block form-group">
+                                <label class="radio"><input type="radio" name="runBN" value="disable">Disable</label>
+                                <label class="radio"><input type="radio" name="runBN" value="daily">Run daily</label>
+                                <label class="radio"><input type="radio" name="runBN" value="weekly">Run weekly</label>
                             </div>
                             <div class="col-xs-3 center-block form-group">
-                                <label class="radio"><input type="radio" name="run">Disable</label>
-                                <label class="radio"><input type="radio" name="run">Run daily</label>
-                                <label class="radio"><input type="radio" name="run">Run weekly</label>
-                            </div>
-                            <div class="col-xs-3 center-block form-group">
-                            <label class="control-label">Run at:</label>
+<!--                            <label class="control-label">Run at:</label>
                             <select class="form-control" name="TXTrunAt">
                                 <option value="0">00:00</option>
                                 <option value="1">01:00</option>
@@ -758,11 +780,11 @@ $(document).ready(function(){
                                 <option value="22">22:00</option>
                                 <option value="23">23:00</option>
                                 
-                            </select>
+                            </select>-->
                         </div>
                         </div>
                         <div class="col-xs-12 center-block form-group">
-                            <div class="col-xs-4 center-block form-group" style="padding: 0px;">
+<!--                            <div class="col-xs-4 center-block form-group" style="padding: 0px;">
                                 <label class="control-label">Time Frame</label>
                                 <div class="col-xs-12 table table-bordered">
                                     <div class="col-xs-6">
@@ -795,20 +817,19 @@ $(document).ready(function(){
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="col-xs-4 center-block form-group">
                                 <label class="control-label">Notification Source</label>
                                 <div class="col-xs-12 table-bordered">
                                     <div class="col-xs-12">
-                                    <label class="radio"><input type="radio" name="event">Creator of Event</label>
-                                    <label class="radio"><input type="radio" name="event">School representative</label>
+                                    <label class="radio"><input type="radio" name="eventBN" value="creator">Creator of Event</label>
+                                    <label class="radio"><input type="radio" name="eventBN" value="rep">School representative</label>
                                     </div>
-                                    <select class="form-control" name="TXTSchoolRepresentative">
-                                        <option value="0">Sabeena</option>
-                                    </select>
+                                         <input type="text" class="form-control" name="TXTSchoolRepresentative" id="schoolRep"  placeholder="Email Address">
+                                    
                                 </div>
                             </div>
-                            <div class="col-xs-4 center-block form-group">
+<!--                            <div class="col-xs-4 center-block form-group">
                                 <label class="control-label">Send Notification to:</label>
                                 <div class="col-xs-12 table-bordered">
                                     <div class="col-xs-12">
@@ -820,7 +841,7 @@ $(document).ready(function(){
                                     <input type="text" name="emailSchoolRepresentative">
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                             
                         </div>
                         <div class="col-xs-9 center-block form-group" style="padding-right: 0px;">
@@ -862,20 +883,20 @@ $(document).ready(function(){
                         </div>
                             <div class="col-xs-12 center-block form-group">
                             <div class="col-xs-3 center-block form-group">
-                                <label class="radio"><input type="radio" name="merit">Demerit</label>
-                                <label class="radio"><input type="radio" name="merit">Merit</label>
+                                <label class="radio"><input type="radio" name="merit" value="Demerit">Demerit</label>
+                                <label class="radio"><input type="radio" name="merit" value="Merit">Merit</label>
                             </div>
-                            <div class="col-xs-3 center-block form-group">
+<!--                            <div class="col-xs-3 center-block form-group">
                                 <label class="radio"><input type="radio" name="event">Single event</label>
                                 <label class="radio"><input type="radio" name="event">Cumulative events</label>
-                            </div>
+                            </div>-->
                             <div class="col-xs-3 center-block form-group">
                                 <label class="radio"><input type="radio" name="run">Disable</label>
                                 <label class="radio"><input type="radio" name="run">Run daily</label>
                                 <label class="radio"><input type="radio" name="run">Run weekly</label>
                             </div>
                             <div class="col-xs-3 center-block form-group">
-                            <label class="control-label">Run at:</label>
+<!--                            <label class="control-label">Run at:</label>
                             <select class="form-control" name="TXTrunAt">
                                 <option value="0">00:00</option>
                                 <option value="1">01:00</option>
@@ -902,7 +923,7 @@ $(document).ready(function(){
                                 <option value="22">22:00</option>
                                 <option value="23">23:00</option>
                                 
-                            </select>
+                            </select>-->
                         </div>
                         </div>
                         <div class="col-xs-12 center-block form-group">

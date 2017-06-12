@@ -17,15 +17,18 @@ public class Jobs {
     private String message;
     private String messagetitle;
    private String type;//behavior,gradebook,admission
-    private String runtime;//daily,weekly,once
+    private String runfreq;//daily,weekly,once
     private String lastrun;
     private int userid;
-    private String category;//merit,demerit
-    private String setting;//any other setting  like single or cumulative event
+    private String setting;//any other setting that is specific to this type of job ex merit or demerit
     private String sender;
     private String cc;
     private String description;
     private String start;
+     private String runhour;
+    private String TFstart;
+    private String TFfinish;
+    private String status;//if it id disabled or enabled
 
     public String getStatus() {
         return status;
@@ -34,18 +37,9 @@ public class Jobs {
     public void setStatus(String status) {
         this.status = status;
     }
-    private String runhour;
-    private String TFstart;
-    private String TFfinish;
-    private String status;
+   
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
+   
 
     public String getSetting() {
         return setting;
@@ -177,12 +171,12 @@ public class Jobs {
         this.messagetitle = messagetitle;
     }
 
-    public String getRuntime() {
-        return runtime;
+    public String getRunfreq() {
+        return runfreq;
     }
 
-    public void setRuntime(String runtime) {
-        this.runtime = runtime;
+    public void setRunfreq(String runfreq) {
+        this.runfreq = runfreq;
     }
 
     public int getUserid() {

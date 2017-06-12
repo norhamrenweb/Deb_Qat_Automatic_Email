@@ -80,9 +80,9 @@ public class JobsListControlador{
                 job.setName(rs.getString("name"));
                 job.setId(rs.getInt("id"));     
                 job.setDescription(rs.getString("description"));
-                SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
-                String dateStr = sdfDate.format(rs.getTimestamp("lastrun"));
-                job.setLastrun(dateStr);
+//                SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+//                String dateStr = sdfDate.format(rs.getTimestamp("lastrun"));
+//                job.setLastrun(dateStr);// when it is null at first it will give error
 //                 Timestamp stamp = rs.getTimestamp("start");
 //               Timestamp finish = rs.getTimestamp("finish");
 //               SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
