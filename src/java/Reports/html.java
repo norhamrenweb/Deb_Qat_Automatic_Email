@@ -89,7 +89,8 @@ public class html extends HttpServlet {
             JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream);
            Map<String, Object> map = new HashMap<String, Object>();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-            java.util.Date startdate =sdf.parse(start);
+            
+            String startdate =sdf.format(start);
             java.util.Date enddate = sdf.parse(end);
             
             map.put("start",startdate);

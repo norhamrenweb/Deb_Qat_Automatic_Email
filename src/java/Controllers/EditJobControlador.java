@@ -49,7 +49,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author nmohamed
  */
 @Controller
-public class CreateSettingControlador{
+public class EditJobControlador{
     
       Connection cn;
       
@@ -64,14 +64,34 @@ public class CreateSettingControlador{
     @RequestMapping("/createsetting/start.htm")
     public ModelAndView start(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
         
-        ModelAndView mv = new ModelAndView("createsettings");  
-        
+        ModelAndView mv = new ModelAndView("editjob");  
+        String jobid = hsr.getParameter("jobid");
+         DriverManagerDataSource dataSource;
+        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
+        this.cn = dataSource.getConnection();
+        Statement st = this.cn.createStatement();
+        String consulta= null;       
+        consulta = "select * from jobs where id ="+jobid;
+        ResultSet rs = st.executeQuery(consulta);
+        Jobs j = new Jobs();
+        while(rs.next())
+        {
+            j.setId(Integer.parseInt(jobid));
+            j.setMessage(rs.getString("message"));
+            j.setMessagetitle(rs.getString("msgtitle"));
+            j.setRunfreq(rs.getString("runfreq"));
+            j.setSender(rs.getString("sender"));
+            j.setName(rs.getString("name"));
+            j.setSetting(rs.getString("setting"));
+            
+        }
+        mv.addObject("job",j);
         return mv;
     }
     @RequestMapping("/createsetting/save.htm")
     public ModelAndView save(@RequestBody Jobs job, HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
         
-        ModelAndView mv = new ModelAndView("createsettings");
+        ModelAndView mv = new ModelAndView("editjob");
        try {
         HttpSession sesion = hsr.getSession();
         User user = (User) sesion.getAttribute("user");
@@ -79,17 +99,14 @@ public class CreateSettingControlador{
         dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
         this.cn = dataSource.getConnection();
         Statement st = this.cn.createStatement();
-        String consulta= null;       
-        consulta = "insert into jobs(name,message,msgtitle,runfreq,sender,setting,type,createdby,createddate) values('"+job.getName()+"','"+job.getMessage()+"','"+job.getMessagetitle()+"','"+job.getRunfreq()+"','"+job.getSender()+"','"+job.getSetting()+"','"+job.getType()+"','"+user.getId()+"',now())";
-        
-       st.executeUpdate(consulta);
+        String consulta= null;     
+        String jobid = hsr.getParameter("jobid");
+        consulta = "update jobs set name = '"+job.getName()+"' ,message = '"+job.getMessage()+"',msgtitle = '"+job.getMessagetitle()+"',runfreq = '"+job.getRunfreq()+"',sender = '"+job.getSender()+"',setting = '"+job.getSetting()+"',type = '"+job.getType()+"' where id ="+ jobid;
+        st.executeUpdate(consulta);
        }catch (SQLException ex) {
      System.out.println("Error"+ex);
         }
         
         return mv;
     }
-
 }
-
-

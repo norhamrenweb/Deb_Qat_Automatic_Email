@@ -21,7 +21,6 @@
         <script>
 $(document).ready(function(){
     var userLang = navigator.language || navigator.userLanguage;
-    var req = 
         $('#dateStart').datetimepicker({
             format: 'YYYY-MM-DD',
             locale: userLang.valueOf(),

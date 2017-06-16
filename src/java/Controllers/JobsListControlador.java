@@ -79,7 +79,7 @@ public class JobsListControlador{
               //  lesson.setId(rs.getString("id_lessons"));
                 job.setName(rs.getString("name"));
                 job.setId(rs.getInt("id"));     
-                job.setDescription(rs.getString("description"));
+                job.setLastrun(rs.getString("lastrun"));
 //                SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
 //                String dateStr = sdfDate.format(rs.getTimestamp("lastrun"));
 //                job.setLastrun(dateStr);// when it is null at first it will give error

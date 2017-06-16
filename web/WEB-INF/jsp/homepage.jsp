@@ -260,7 +260,6 @@ var ajax;
                         <tr>
                             <td>id</td>
                             <td>Job Name</td>
-                            <td>Description</td>
                             <td>Last Run</td>
                             <td><spring:message code="etiq.actionlessons"/></td>
                         </tr>
@@ -270,7 +269,6 @@ var ajax;
                         <tr>
                             <td>${jobs.id}</td>
                             <td>${jobs.name}</td>
-                            <td>${jobs.description}</td>
                             <td>${jobs.lastrun}</td>
                             <td>
                                 <div class="col-xs-4">

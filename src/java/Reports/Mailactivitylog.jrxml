@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-06-09T13:54:51 -->
+<!-- 2017-06-15T12:17:02 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Mailactivitylog" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4498d6fb-f6a6-4479-bb21-17e8124c1131">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DebQAT DB"/>
@@ -81,10 +81,14 @@
 		<field name="timestamp" class="java.sql.Timestamp"/>
 		<field name="recipients" class="java.lang.String"/>
 	</subDataset>
-	<parameter name="start" class="java.util.Date"/>
-	<parameter name="end" class="java.util.Date"/>
+	<parameter name="start" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new java.util.Date()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="end" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new java.util.Date()]]></defaultValueExpression>
+	</parameter>
 	<queryString language="SQL">
-		<![CDATA[SELECT * FROM log WHERE timestamp between $P{start} and $P{end}]]>
+		<![CDATA[SELECT * FROM   log  WHERE date between $P{start} and $P{end}]]>
 	</queryString>
 	<field name="job_id" class="java.lang.Integer"/>
 	<field name="timestamp" class="java.sql.Timestamp"/>
@@ -122,8 +126,8 @@
 					<property name="com.jaspersoft.studio.components.autoresize.next" value="true"/>
 					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
 				</reportElement>
-				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="Dataset1" uuid="08d887d8-3771-4620-b61b-16f9b2d1d0d5">
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="Dataset1" uuid="a66a1fc4-cd08-4907-8f5a-73e098ef027f">
 						<datasetParameter name="start">
 							<datasetParameterExpression><![CDATA[$P{start}]]></datasetParameterExpression>
 						</datasetParameter>
