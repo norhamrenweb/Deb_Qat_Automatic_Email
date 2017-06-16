@@ -89,7 +89,34 @@ public class CreateSettingControlador{
         
         return mv;
     }
-
+ @RequestMapping("/createsetting/edit.htm")
+    public ModelAndView edit(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
+        
+        ModelAndView mv = new ModelAndView("createsettings");  
+         String jobid = hsr.getParameter("jobid");
+         DriverManagerDataSource dataSource;
+        dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
+        this.cn = dataSource.getConnection();
+        Statement st = this.cn.createStatement();
+        String consulta= null;       
+        consulta = "select * from jobs where id ="+jobid;
+        ResultSet rs = st.executeQuery(consulta);
+        Jobs j = new Jobs();
+        while(rs.next())
+        {
+            j.setId(Integer.parseInt(jobid));
+            j.setMessage(rs.getString("message"));
+            j.setMessagetitle(rs.getString("msgtitle"));
+            j.setRunfreq(rs.getString("runfreq"));
+            j.setSender(rs.getString("sender"));
+            j.setName(rs.getString("name"));
+            j.setSetting(rs.getString("setting"));
+            
+        }
+        mv.addObject("job",j);
+        mv.addObject("reqtype", "edit");
+        return mv;
+    }
 }
 
 
