@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
+import sendemailjobs.SendEmailJobs;
 
 /**
  *
@@ -157,5 +158,15 @@ public class JobsListControlador{
 //        
 //        return mv;
 //    }
-
+ @RequestMapping("/homepage/runJob.htm")
+    public ModelAndView runJob(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
+        
+        ModelAndView mv = new ModelAndView("homepage");
+       String jobid = hsr.getParameter("jobid");
+        SendEmailJobs.sendEmails(3);
+        mv.addObject("message","Job executed");
+        
+        
+        return mv;
+    }
 }
