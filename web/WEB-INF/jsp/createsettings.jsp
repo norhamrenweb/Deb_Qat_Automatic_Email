@@ -21,7 +21,7 @@
         <script>
 $(document).ready(function(){
     var userLang = navigator.language || navigator.userLanguage;
-    var req = ${reqtype};
+  
         $('#dateStart').datetimepicker({
             format: 'YYYY-MM-DD',
             locale: userLang.valueOf(),
@@ -645,6 +645,7 @@ $(document).ready(function(){
             });
             function AddVariable()
            {
+    
                var value = $('#variables option:selected').val();
                CKEDITOR.instances['NotificationMessage'].insertText(value);
    
@@ -674,16 +675,16 @@ $(document).ready(function(){
                             <label class="control-label"><spring:message code="etiq.txtlevels"/></label>
                             <select class="form-control" name="TXTlevel" id="typeJob" onchange="comboSelectionJob()">
                                 <option value="0" >Select type</option>
-                                <option value="1" >Accounting notification</option>
-                                <option value="2" >Attendance notification</option>
+                                <option value="1" disabled>Accounting notification</option>
+                                <option value="2" disabled >Attendance notification</option>
                                 <option value="3" >Behaviour notification</option>
-                                <option value="4" >Create day attendance</option>
-                                <option value="5" >Custom maintenance Job</option>
-                                <option value="6" >Grade book</option>
-                                <option value="7" >Library late fee</option>
-                                <option value="8" >Library late notification</option>
-                                <option value="9" >NelNet/Pay now notification</option>
-                                <option value="10" >Web form notification</option>
+                                <option value="4" disabled >Create day attendance</option>
+                                <option value="5" disabled >Custom maintenance Job</option>
+                                <option value="6" disabled >Grade book</option>
+                                <option value="7" disabled >Library late fee</option>
+                                <option value="8" disabled >Library late notification</option>
+                                <option value="9" disabled >NelNet/Pay now notification</option>
+                                <option value="10" disabled >Web form notification</option>
                                 <%--<c:forEach var="levels" items="${typejob}">
                                     <option value="${job.id[0]}" >${job.name}</option>
                                 </c:forEach>--%>
@@ -692,21 +693,21 @@ $(document).ready(function(){
                     </div>
                 </fieldset>
             </form:form>
-            <form:form id="formpepi" method ="post"  >
+            
                 <fieldset class="hidden" id="AccountingNotification">
                     <legend>Accounting Notification</legend>
 
                         <div class="col-xs-3 center-block form-group" id="addObjective">
                             <label class="control-label">Job title</label>
-                            <input type="text" class="form-control" name="TXTnamenewobjective" id="titleJob"  placeholder="Name">
+                            <input type="text" class="form-control" name="TXTnamenewobjective" id="titleJob"  placeholder="Name" required="true">
                         </div>
                     <div class="col-xs-3 center-block form-group" id="messageTitle">
                             <label class="control-label">Message title</label>
-                            <input type="text" class="form-control" name="TXTnamenewmessage" id="messagetitle"  placeholder="Name">
+                            <input type="text" class="form-control" name="TXTnamenewmessage" id="messagetitle"  placeholder="Name" required="true">
                         </div>
                         <div class="col-xs-12 center-block form-group">
                             <label class="control-label">Notification Message</label>
-                            <textarea type="text" class="form-control" name="TXTnamenewobjective" id="descriptionnewobjective"  placeholder="Comments"></textarea>
+                            <textarea type="text" class="form-control" name="TXTnamenewobjective" id="descriptionnewobjective"  placeholder="Comments" required="true"></textarea>
                         </div>
                         <div class="col-xs-12 center-block form-group">
                             <label class="control-label">Frecuency</label>
@@ -734,16 +735,17 @@ $(document).ready(function(){
                             <input type="button" name="AddObjective" value="Save" class="btn btn-success" id="savedEditObjective" data-target=".bs-example-modal-lg" onclick="saveeditObjective()"/> 
                         </div>
                 </fieldset>
+            <form:form id="formpepi" method ="post"  >
                 <fieldset class="hidden" id="BehaviorNotification">
                     <legend>Behavior notification</legend>
                     
                         <div class="col-xs-3 center-block form-group">
                             <label class="control-label">Title Job</label>
-                            <input type="text" class="form-control" name="TXTnamenewobjective" id="titleJobBN"  placeholder="Name">
+                            <input type="text" class="form-control" name="TXTnamenewobjective" id="titleJobBN"  placeholder="Name" required>
                         </div>
                     <div class="col-xs-3 center-block form-group" id="messageTitle">
                             <label class="control-label">Message title</label>
-                            <input type="text" class="form-control" name="TXTnamenewmessage" id="messagetitleBN"  placeholder="Name">
+                            <input type="text" class="form-control" name="TXTnamenewmessage" id="messagetitleBN"  placeholder="Name" required>
                         </div>
                         <div class="col-xs-12 center-block form-group">
                             <div class="col-xs-3 center-block form-group">
@@ -755,9 +757,9 @@ $(document).ready(function(){
                                 <label class="radio"><input type="radio" name="event">Cumulative events</label>
                             </div>-->
                             <div class="col-xs-3 center-block form-group">
-                                <label class="radio"><input type="radio" name="runBN" value="disable">Disable</label>
-                                <label class="radio"><input type="radio" name="runBN" value="daily">Run daily</label>
-                                <label class="radio"><input type="radio" name="runBN" value="weekly">Run weekly</label>
+                                <label class="radio"><input type="radio" name="runBN" value="disable" required="required">Disable</label>
+                                <label class="radio"><input type="radio" name="runBN" value="daily" required="required">Run daily</label>
+                                <label class="radio"><input type="radio" name="runBN" value="weekly" required="required">Run weekly</label>
                             </div>
                             <div class="col-xs-3 center-block form-group">
 <!--                            <label class="control-label">Run at:</label>
@@ -829,11 +831,12 @@ $(document).ready(function(){
                                 <label class="control-label">Notification Source</label>
                                 <div class="col-xs-12 table-bordered">
                                     <div class="col-xs-12">
-                                    <label class="radio"><input type="radio" name="eventBN" value="creator">Creator of Event</label>
-                                    <label class="radio"><input type="radio" name="eventBN" value="rep">School representative</label>
+                                        <label class="radio"><input type="radio" name="eventBN" value="creator" required="required" onclick="activeEmail('creator')">Creator of Event</label>
+                                    <label class="radio"><input type="radio" name="eventBN" value="rep" required="required" onclick="activeEmail('rep')">School representative</label>
                                     </div>
-                                         <input type="text" class="form-control" name="TXTSchoolRepresentative" id="schoolRep"  placeholder="Email Address">
-                                    
+                                    <div class="col-xs-12">
+                                        <input type="email" class="form-control" name="TXTSchoolRepresentative" id="schoolRep" placeholder="Email Address" required disabled >
+                                    </div> 
                                 </div>
                             </div>
 <!--                            <div class="col-xs-4 center-block form-group">
@@ -853,13 +856,28 @@ $(document).ready(function(){
                         </div>
                         <div class="col-xs-9 center-block form-group" style="padding-right: 0px;">
                             <label class="control-label">Notification Message</label>
-                            <textarea name="NotificationMessage" id="NotificationMessage">
+                            <textarea name="NotificationMessage" id="NotificationMessage" required="required">
                                 
                             </textarea>
                             <script>
+                                function activeEmail(mail)
+                                {
+                                    
+                                    if(mail === 'creator'){
+                                        $('#schoolRep').attr('disabled', true);
+                                    }else{
+                                        $('#schoolRep').attr('disabled', false);
+                                    }
+                                }
                 // Replace the <textarea id="editor1"> with a CKEditor
                 // instance, using default configuration.
-                CKEDITOR.replace( 'NotificationMessage' );
+                    CKEDITOR.replace( 'NotificationMessage' ).on( 'required', function( evt ) {
+//	                        alert( 'Content of editor1 is required.' );
+                                $("#NotificationMessageEmpty").modal();
+	                        evt.cancel(); // Prevent submit.
+	                } );
+	
+	                
             </script>
                         </div>
                         <div class="col-xs-3 center-block form-group" style="padding-left: 0px;">
@@ -878,9 +896,10 @@ $(document).ready(function(){
                     
                         
                         <div class="col-xs-2 text-center form-group paddingLabel">
-                            <input type="button" name="AddObjective" value="save" class="btn btn-success" id="AddObjective" data-target=".bs-example-modal-lg" onclick="saveaddObjective()"/>
+                            <input type="submit" name="CreateJob" value="Create Job" class="btn btn-success" id="CreateJob"/>
                         </div>
                 </fieldset>
+            </form:form>   
                 <fieldset class="hidden" id="gradeBook">
                     <legend>Grade book</legend>
                     
@@ -944,9 +963,10 @@ $(document).ready(function(){
                 </fieldset>
   
                        
-            </form:form>
+            
                       
         </div>
+                        
 <!--        ANTIGUO CREATE LESSONS USADO COMO REFERENCIA-->
 <%--        <div class="container">
             <h1 class="text-center">Create Scheme of Work</h1>
@@ -1167,16 +1187,14 @@ $(document).ready(function(){
         
         <div id="modalConfirmeDeleteContent">
             <!-- Modal -->
-            <div class="modal fade" id="confirmedDeleteContent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal fade" id="NotificationMessageEmpty" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Are you sure you want to delete this content?</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>                           
                         </div>
                         <div class="modal-body">
-                            <button type="button" class="btn btn-default" data-dismiss="modal" id="" onclick="deleteContent()">Yes</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" >No</button>
+                            <h4 class="modal-title" id="myModalLabel">Notification Message Empty</h4>
                         </div>
                     </div>
                 </div>
