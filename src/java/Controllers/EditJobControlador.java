@@ -61,7 +61,7 @@ public class EditJobControlador{
         Object beanobject = contexto.getBean(nombrebean);
         return beanobject;
     }
-    @RequestMapping("/createsetting/start.htm")
+    @RequestMapping("/editjob/start.htm")
     public ModelAndView start(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
         
         ModelAndView mv = new ModelAndView("editjob");  
@@ -88,7 +88,7 @@ public class EditJobControlador{
         mv.addObject("job",j);
         return mv;
     }
-    @RequestMapping("/createsetting/save.htm")
+    @RequestMapping("/editjob/save.htm")
     public ModelAndView save(@RequestBody Jobs job, HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
         
         ModelAndView mv = new ModelAndView("editjob");
