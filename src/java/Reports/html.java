@@ -74,8 +74,8 @@ public class html extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException, JRException, ParseException {
         Connection conn = null;
         ServletOutputStream os = response.getOutputStream();
-        String start = request.getParameter("start");
-        String end = request.getParameter("end");
+//        String start = request.getParameter("start");
+//        String end = request.getParameter("end");
             DefaultJasperReportsContext context = DefaultJasperReportsContext.getInstance();
             JRPropertiesUtil.getInstance(context).setProperty("net.sf.jasperreports.xpath.executer.factory",
                 "net.sf.jasperreports.engine.util.xml.JaxenXPathExecuterFactory");
@@ -88,15 +88,15 @@ public class html extends HttpServlet {
         InputStream jasperStream = this.getClass().getResourceAsStream("Mailactivitylog.jasper");
             JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream);
            Map<String, Object> map = new HashMap<String, Object>();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+//            
+//            String startdate =sdf.format(start);
+//            java.util.Date enddate = sdf.parse(end);
+//            
+//            map.put("start",startdate);
+//            map.put("end",enddate);
             
-            String startdate =sdf.format(start);
-            java.util.Date enddate = sdf.parse(end);
-            
-            map.put("start",startdate);
-            map.put("end",enddate);
-            
-            JasperPrint jasperPrint = jasperFillManager.fill(jasperReport, map, conn);//fill(jasperReport,map, conn);
+            JasperPrint jasperPrint = jasperFillManager.fill(jasperReport, new HashMap(), conn);//fill(jasperReport,map, conn);
             exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
             exporter.setExporterOutput(new SimpleHtmlExporterOutput(os));
  //            exporter.setConfiguration(createHtmlConfiguration());

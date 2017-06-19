@@ -140,9 +140,27 @@ var ajax;
         ajax.open("POST","detailsLesson.htm?LessonsSelected="+LessonsSelected,true);
         ajax.send("");
   };
-   function modifySelect(LessonsSelected)
+   function runSelect(LessonsSelected)
     {
-       window.open("<c:url value="/editlesson/start.htm?LessonsSelected="/>"+LessonsSelected);
+      
+                    $.ajax({
+                    type: "GET",
+                        url: "runJob.htm?jobid="+LessonsSelected,
+                        data: LessonsSelected,
+                        dataType: 'text' ,           
+                     
+                        success: function(data) {
+                            //console.log("success:",data);
+                            
+                            display(data);
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                                console.log(xhr.status);
+                                   console.log(xhr.responseText);
+                                   console.log(thrownError);
+                               }
+
+                    });
   };
    function funcionCallBackdeleteLesson()
     {
@@ -278,7 +296,7 @@ var ajax;
                                     <input name="TXTid_lessons_viewLog" type="image" src="<c:url value="/recursos/img/iconos/ViewLog.svg"/>" value="${lecciones.id}" id="viewLog" onclick="detailsSelect(${lecciones.id})" width="40px" data-placement="bottom" title="View Log">
                                 </div>
                                 <div class="col-xs-4">
-                                    <input name="TXTid_lessons_run" type="image" src="<c:url value="/recursos/img/iconos/Run.svg"/>" value="${lecciones.id}" id="run" onclick="modifySelect(${lecciones.id})" width="40px" data-placement="bottom" title="Run">
+                                    <input name="TXTid_lessons_run" type="image" src="<c:url value="/recursos/img/iconos/Run.svg"/>" value="${lecciones.id}" id="run" onclick="runSelect(${lecciones.id})" width="40px" data-placement="bottom" title="Run">
                                 </div>
 <%--                            <div class="col-xs-3">
                                     <input class="delete" name="TXTid_lessons_eliminar" type="image" src="<c:url value="/recursos/img/btn/btn_delete.svg"/>" value="${lecciones.id}" id="delete" onclick="deleteSelectSure(${lecciones.id}, '${lecciones.name}')" width="40px" data-placement="bottom" title="Delete">
