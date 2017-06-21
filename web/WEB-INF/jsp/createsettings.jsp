@@ -462,9 +462,14 @@ $(document).ready(function(){
                         success: function(data) {
                             
                             var json = JSON.parse(data); 
+                            var grades = JSON.parse(json.grades);
+                            var students = JSON.parse(json.students);
                             alert(json);
-                            $.each(json, function(i, item) { 
-                                $('#levelStudent').append('<option value="'+json[i].id+'" data-title="' + json[i].name + '" data-content="'+json[i].description+'">' + json[i].name + '</option>');
+                            $.each(grades, function(i, item) { 
+                                $('#levelStudent').append('<option value="'+grades[i].id+'" data-title="' + grades[i].name + '" data-content="'+grades[i].description+'">' + grades[i].name + '</option>');
+                            });
+                             $.each(students, function(i, item) { 
+                                $('#origin').append('<option value="'+students[i].id+'" data-title="' + students[i].name + '" data-content="'+students[i].description+'">' + students[i].name + '</option>');
                             });
                            
                         },

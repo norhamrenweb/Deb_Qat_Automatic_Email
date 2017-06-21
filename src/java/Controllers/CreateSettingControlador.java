@@ -129,7 +129,7 @@ public class CreateSettingControlador{
         String stu_json = new Gson().toJson(students);
         mv.addObject("listaAlumnos",stu_json);
         Statement st = this.cn.createStatement();
-        ResultSet rs = st.executeQuery("SELECT GradeLevel,GradeLevelID FROM AH_ZAF.dbo.GradeLevels");
+        ResultSet rs = st.executeQuery("SELECT GradeLevel,GradeLevelID FROM GradeLevels");
         List <Level> grades = new ArrayList();
         Level l = new Level();
         l.setName("Select level");
@@ -146,7 +146,11 @@ public class CreateSettingControlador{
         String grade_json = new Gson().toJson(grades);
          mv.addObject("gradelevels", grade_json);
 //        return mv;
-return grade_json;
+    JSONObject hi = new JSONObject();
+    hi.put("grades",grade_json);
+    hi.put("students",stu_json);
+    String test = hi.toString();
+return hi.toString();
     } 
     public ArrayList<Students> getStudents() throws SQLException
     {
@@ -156,7 +160,7 @@ return grade_json;
             
              Statement st = this.cn.createStatement();
              
-            String consulta = "SELECT * FROM AH_ZAF.dbo.Students where Status = 'Enrolled'";
+            String consulta = "SELECT * FROM Students where Status = 'Enrolled'";
             ResultSet rs = st.executeQuery(consulta);
           
             while (rs.next())
