@@ -277,7 +277,7 @@ $(document).ready(function(){
                     type: 'POST',
                         url: 'save.htm',
                         data: json,
-                       datatype:"json",
+                        datatype:"json",
                         contentType: "application/json",          
                      
                         success: function(data) {                          
@@ -292,201 +292,12 @@ $(document).ready(function(){
                     });    
                 }
             
-            function saveeditObjective()
-            {
-
-        var seleccion = document.getElementById("objective").value;
-        var name = document.getElementById("editNameObjective").value;
-        var description = document.getElementById("editDescriptionObjective").value;
-        var subjectid = document.getElementById("subject").value;
-        var myObj = {};
-                myObj["name"] = name;
-                myObj["description"] = description;
-                myObj["id"] = seleccion;
-                myObj["subjectid"] = subjectid;
-                var json = JSON.stringify(myObj);
-            $.ajax({
-                    type: 'POST',
-                        url: 'editObjective.htm?data='+json,
-                        data: json,
-                        dataType: 'text' ,           
-                     
-                        success: function(data) {
-                            $('#objective').empty();
-                            var json = JSON.parse(data);                            
-                            $.each(json, function(i, item) { 
-                            $('#objective').append('<option value = "'+json[i].id[0]+'" >' + json[i].name + '</option>');
-                            });
-                           $('#formEditobjetive').addClass("hidden");
-                        },
-                        error: function (xhr, ajaxOptions, thrownError) {
-                                console.log(xhr.status);
-                                   console.log(xhr.responseText);
-                                   console.log(thrownError);
-                               }
-
-                    });    
-                }
-            function saveeditContent()
-            {
-
-        var seleccion = document.getElementById("content").value;
-        var name = document.getElementById("editNameContent").value;
-        var description = document.getElementById("editCommentsContent").value;
-        var objid = document.getElementById("objective").value;
-        var myObj = {};
-                myObj["name"] = name;
-                myObj["description"] = description;
-                myObj["id"] = seleccion;
-                myObj["objid"] = objid;
-                var json = JSON.stringify(myObj);
-            $.ajax({
-                    type: 'POST',
-                        url: 'editContent.htm?data='+json,
-                        data: json,
-                        dataType: 'text' ,           
-                     
-                        success: function(data) {
-                            $('#content').empty();
-                            var json = JSON.parse(data);                            
-                            $.each(json, function(i, item) { 
-                            $('#content').append('<option value = "'+json[i].id[0]+'" >' + json[i].name + '</option>');
-                            $('#formEditcontent').addClass("hidden");
-                        });
-                           
-                        },
-                        error: function (xhr, ajaxOptions, thrownError) {
-                                console.log(xhr.status);
-                                   console.log(xhr.responseText);
-                                   console.log(thrownError);
-                               }
-
-                    });    
-                } 
-            function saveaddContent()
-            {
-
-     //   var seleccion = document.getElementById("objective").value;
-        var name = document.getElementById("namenewcontent").value;
-        var description = document.getElementById("commentsnewcontent").value;
-        var objid = document.getElementById("objective").value;
-        var myObj = {};
-                myObj["name"] = name;
-                myObj["description"] = description;
-    //            myObj["id"] = seleccion;
-                myObj["objid"] = objid;
-                var json = JSON.stringify(myObj);
-            $.ajax({
-                    type: 'POST',
-                        url: 'addContent.htm?data='+json,
-                        data: json,
-                        dataType: 'text' ,           
-                     
-                        success: function(data) {                          
-                            var json = JSON.parse(data);                               
-                            $('#content').append('<option value = "'+json.id[0]+'" >' + json.name + '</option>');
-                            $('#formAddcontent').addClass("hidden");           
-                        },
-                        error: function (xhr, ajaxOptions, thrownError) {
-                                console.log(xhr.status);
-                                   console.log(xhr.responseText);
-                                   console.log(thrownError);
-                               }
-
-                    });    
-                }
-            function deleteMethod()
-            {
-                var seleccion = document.getElementById("method").value;
-                 $.ajax({
-                    type: 'POST',
-                        url: 'delMethod.htm?id='+seleccion,
-                        data: seleccion,
-                        dataType: 'text' ,           
-                     
-                        success: function(data) {                          
-                            if(data==='success')  {
-                                $('#method option:selected').remove();
-           //         $('#objective').remove('option:selected');
-                            }else{
-                                $('#buttomModalMethod').click();
-                                $('#modal-methodLinkLessons').replaceWith('<div class="col-xs-12 text-center"><h3>'+ data +'</h3></div>');
-                            }
-                        },
-                        error: function (xhr, ajaxOptions, thrownError) {
-                                console.log(xhr.status);
-                                   console.log(xhr.responseText);
-                                   console.log(thrownError);
-                               }
-
-                    });    
-            }
-            function saveaddMethod()
-            {
-
-     //   var seleccion = document.getElementById("objective").value;
-        var name = document.getElementById("namenewmethod").value;
-        var description = document.getElementById("commentsnewmethod").value;
-        var myObj = {};
-                myObj["name"] = name;
-                myObj["description"] = description;
-                var json = JSON.stringify(myObj);
-            $.ajax({
-                    type: 'POST',
-                        url: 'addMethod.htm?data='+json,
-                        data: json,
-                        dataType: 'text' ,           
-                     
-                        success: function(data) {                          
-                            var json = JSON.parse(data);                               
-                        $('#method').append('<option value = "'+json.id[0]+'" >' + json.name + '</option>');
-                        $('#formAddmethod').addClass("hidden");               
-                        },
-                        error: function (xhr, ajaxOptions, thrownError) {
-                                console.log(xhr.status);
-                                   console.log(xhr.responseText);
-                                   console.log(thrownError);
-                               }
-
-                    });    
-                }
-                function saveeditMethod()
-            {
-
-        var seleccion = document.getElementById("method").value;
-        var name = document.getElementById("editNameMethod").value;
-        var description = document.getElementById("editCommentsMethod").value;
-        var myObj = {};
-                myObj["name"] = name;
-                myObj["description"] = description;
-                myObj["id"] = seleccion;
-                var json = JSON.stringify(myObj);
-            $.ajax({
-                    type: 'POST',
-                        url: 'editMethod.htm?data='+json,
-                        data: json,
-                        dataType: 'text' ,           
-                     
-                        success: function(data) {
-                            $('#method').empty();
-                            var json = JSON.parse(data);                            
-                            $.each(json, function(i, item) { 
-                            $('#method').append('<option value="'+json[i].id[0]+'" data-title="' + json[i].name + '" data-content="'+json[i].description+'">' + json[i].name + '</option>');
-                            $('#formEditmethod').addClass("hidden");
-                        });
-                           
-                        },
-                        error: function (xhr, ajaxOptions, thrownError) {
-                                console.log(xhr.status);
-                                   console.log(xhr.responseText);
-                                   console.log(thrownError);
-                               }
-
-                    });    
-                }
-                function save(){
-                    
-                }
+       
+        
+       
+ 
+    
+            
                 function funcionCallBackJob()
             {
 //                if (ajax.readyState === 4) {
@@ -515,31 +326,16 @@ $(document).ready(function(){
                          $('#AccountingNotification').addClass("hidden");
                          $('#AttendanceNotification').addClass("hidden");
                          $('#BehaviorNotification').addClass("hidden");
+                       }else if(jobselected === '11'){
+                         $('#ParentsNotification').removeClass("hidden");
+                         $('#AccountingNotification').addClass("hidden");
+                         $('#AttendanceNotification').addClass("hidden");
+                         $('#BehaviorNotification').addClass("hidden");
                        };
 //                    }
 //                }
             }
-            function comboSelectionJob()
-            {
-                if (window.XMLHttpRequest) //mozilla
-                {
-                    ajax = new XMLHttpRequest(); //No Internet explorer
-                } else
-                {
-                    ajax = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-                $('#namenewobjective').empty();
-                $('#descriptionnewobjective').empty();
-                $('#content').empty();
-                
-                ajax.onreadystatechange = funcionCallBackJob;
-                var seleccion1 = document.getElementById("typeJob").value;
-                ajax.open("GET", "subjectlistLevel.htm?seleccion1=" + seleccion1, true);
-
-                ajax.send("");
-
-            }
+            
             $(function () {
                 
                 $("input[name='TimeFrame']").change(function () {
@@ -646,13 +442,74 @@ $(document).ready(function(){
                     $('#content').empty();
                 });
             });
+            
             function AddVariable()
-           {
+            {
     
-               var value = $('#variables option:selected').val();
+               var value = $('#variables1 option:selected').val();
                CKEDITOR.instances['NotificationMessage'].insertText(value);
-   
-               }
+               CKEDITOR.instances['MailMessage'].insertText(value);
+             }
+            function ShowRecipients()
+            {
+            $('#divRecipients').removeClass("hidden");
+
+            $.ajax({
+                        type: 'POST',
+                        url: 'parentNotify.htm',
+                        dataType: 'text' ,           
+                     
+                        success: function(data) {
+                            
+                            var json = JSON.parse(data); 
+                            alert(json);
+                            $.each(json, function(i, item) { 
+                                $('#levelStudent').append('<option value="'+json[i].id+'" data-title="' + json[i].name + '" data-content="'+json[i].description+'">' + json[i].name + '</option>');
+                            });
+                           
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                                console.log(xhr.status);
+                                   console.log(xhr.responseText);
+                                   console.log(thrownError);
+                               }
+
+                    });  
+             }
+//SELECT STUDENT FOR SEND MAIL
+$().ready(function() 
+	{ 
+                  
+		$('.pasar').click(function() {
+                    !$('#origen option:selected').remove().appendTo('#destino');
+                    var alumnosSelected = $('#destino').length;
+                    var objectiveSelected = $('#objective').val();
+                    if(alumnosSelected !== 0 && objectiveSelected !== 0 && objectiveSelected !== null && objectiveSelected !== ''){
+                        $('#createOnClick').attr('disabled', false);
+                    }
+                    return;
+                });  
+		$('.quitar').click(function() {
+                    !$('#destino option:selected').remove().appendTo('#origen');
+                    var alumnosSelected = $('#destino').length;
+                    var objectiveSelected = $('#objective').val();
+                    if(alumnosSelected === 0 || ( objectiveSelected === 0 || objectiveSelected === null || objectiveSelected === '')){
+                        $('#createOnClick').attr('disabled', true);
+                    }
+                    return;  
+                });
+		$('.pasartodos').click(function() {
+                    $('#origen option').each(function() { $(this).remove().appendTo('#destino'); });
+                    var objectiveSelected = $('#objective').val();
+                    if( objectiveSelected === 0 || objectiveSelected === null || objectiveSelected === ''){
+                        $('#createOnClick').attr('disabled', true);
+                    }
+                });
+		$('.quitartodos').click(function() {
+                    $('#destino option').each(function() { $(this).remove().appendTo('#origen'); });
+                    $('#createOnClick').attr('disabled', true);
+                });
+	});
         </script>
         <style>
             textarea 
@@ -676,7 +533,7 @@ $(document).ready(function(){
                     <div class="col-xs-12">
                         <div class="col-xs-6 form-group">
                             <label class="control-label"><spring:message code="etiq.txtlevels"/></label>
-                            <select class="form-control" name="TXTlevel" id="typeJob" onchange="comboSelectionJob()">
+                            <select class="form-control" name="TXTlevel" id="typeJob" onchange="funcionCallBackJob()">
                                 <option value="0" >Select type</option>
                                 <option value="1" disabled>Accounting notification</option>
                                 <option value="2" disabled >Attendance notification</option>
@@ -688,6 +545,7 @@ $(document).ready(function(){
                                 <option value="8" disabled >Library late notification</option>
                                 <option value="9" disabled >NelNet/Pay now notification</option>
                                 <option value="10" disabled >Web form notification</option>
+                                <option value="11" >Parents notification</option>
                                 <%--<c:forEach var="levels" items="${typejob}">
                                     <option value="${job.id[0]}" >${job.name}</option>
                                 </c:forEach>--%>
@@ -702,9 +560,9 @@ $(document).ready(function(){
 
                         <div class="col-xs-3 center-block form-group" id="addObjective">
                             <label class="control-label">Job title</label>
-                            <input type="text" class="form-control" name="TXTnamenewobjective" id="titleJob"  placeholder="Name" required="true">
+                            <input type="text" class="form-control" name="TXTnamenewobjective" id="titleJob"  placeholder="Name" required="true" />
                         </div>
-                    <div class="col-xs-3 center-block form-group" id="messageTitle">
+                        <div class="col-xs-3 center-block form-group" id="messageTitle">
                             <label class="control-label">Message title</label>
                             <input type="text" class="form-control" name="TXTnamenewmessage" id="messagetitle"  placeholder="Name" required="true">
                         </div>
@@ -964,7 +822,135 @@ $(document).ready(function(){
                             <input type="button" name="AddObjective" value="save" class="btn btn-success" id="AddObjective" data-target=".bs-example-modal-lg" onclick="saveaddObjective()"/>
                         </div>
                 </fieldset>
-  
+<!--                FORMULARIO NOTIFICACION PADRES MAIL OCULTO        -->
+                <fieldset class="hidden" id="ParentsNotification">
+                    <legend>Parents notification</legend>
+                    
+                        <div class="col-xs-12 center-block">
+                            <div class="col-xs-1">
+                                 <label class="control-label">to</label>
+                            </div>
+                            <div class="col-xs-10 form-group">
+                                <input type="text" class="form-control" name="TXTnamenewobjective" id="titleJobBN"  placeholder="Name" required>
+                            </div>
+                            <div class="col-xs-1">
+                                <input type="button" class="btn btn-success" name="AddMailStudents" id="AddMailStudents" value="+" onclick="ShowRecipients()">
+                            </div>
+                        </div>
+<!--                    SELECCIONA DESTINATARIOS MAIL-->
+                        <div class="col-xs-12 center-block hidden" id="divRecipients">
+                            <div class="col-xs-6">
+                                <fieldset>
+                                <legend>Select student</legend>
+                                <div class="col-xs-12">
+                                    <div class="col-xs-2">
+                                        <select class="form-control" name="levelStudent" id="levelStudent" style="width: 100% !important;" onchange="comboSelectionLevelStudent()">
+                                            <c:forEach var="levels" items="${gradelevels}">
+                                                <option value="${levels.id[0]}" >${levels.name}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <select class="form-control" size="20" multiple name="origen[]" id="origen" style="width: 100% !important;">
+                                            <c:forEach var="alumnos" items="${listaAlumnos}">
+                                                <option value="${alumnos.id_students}" >${alumnos.nombre_students}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-xs-2">
+                                        <div class="col-xs-12 text-center" style="padding-bottom: 10px; padding-top: 50px;">
+                                            <input type="button" class="btn btn-success btn-block pasar" value="<spring:message code="etiq.txtadd"/> »">
+                                        </div>
+                                        <div class="col-xs-12 text-center" style="padding-bottom: 10px;">
+                                            <input type="button" class="btn btn-danger btn-block quitar" value="« <spring:message code="etiq.txtremove"/>">
+                                        </div>
+                                        <div class="col-xs-12 text-center" style="padding-bottom: 10px;">
+                                            <input type="button" class="btn btn-success btn-block pasartodos" value="<spring:message code="etiq.txtaddAll"/> »">
+                                        </div>
+                                        <div class="col-xs-12 text-center" style="padding-bottom: 10px;">
+                                            <input type="button" class="btn btn-danger btn-block quitartodos" value="« <spring:message code="etiq.txtremoveAll"/>">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-3">
+                                        <select class="form-control submit" size="20" multiple name="destino[]" id="destino" style="width: 100% !important;"> 
+
+                                        </select>
+                                    </div>
+                                </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-xs-6">
+                                <fieldset>
+                                    <legend>Select recipients</legend>
+                                    <div class="col-xs-12 checkbox">
+                                        <label><input type="checkbox" name="student" value="1"><strong>Student</strong> (will send to the cell phone on the student screen)</label>
+                                    </div>
+                                    <div class="col-xs-12 checkbox">
+                                        <label><input type="checkbox"  name="chequeado" value="custody" ><strong>Custody</strong> (any individual marked as custody in the relationship card)</label>
+                                    </div>
+                                    <div class="col-xs-12 checkbox">
+                                        <label><input type="checkbox" name="chequeado" value="correspondence" ><strong>Correspondence</strong> (any individual marked as correspondence in the relationship card)</label>
+                                    </div>
+                                    <div class="col-xs-12 checkbox">
+                                        <label><input type="checkbox" name="padre" value="mother" ><strong>Mother</strong> (any individual marked as mother in the relationship card)</label>
+                                    </div>
+                                    <div class="col-xs-12 checkbox">
+                                        <label><input type="checkbox" name="padre" value="father"><strong>Father</strong> (any individual marked as father in the relationship card)</label>
+                                    </div>
+                                    <div class="col-xs-12 checkbox">
+                                        <label><input type="checkbox" name="chequeado" value="grandparent" ><strong>Grandparent</strong> (any individual marked as grandparent in the relationship card)</label>
+                                    </div>
+                                    <!--- <div class="col-xs-12 checkbox">
+                                    <label><input type="checkbox" name="enrollment" value="1"><strong>Enrollment</strong> Responsibility (any individual marked as enrollment responsibility)</label>
+                                    </div>
+                                     ---><div class="col-xs-12 checkbox">
+                                        <label><input type="checkbox" name="ec" value="1"><strong>Emergency Contacts</strong> (any individual marked as emergency contact in the Student EC/PU Contacts Area)</label>
+                                    </div>
+                                    <div class="col-xs-12 checkbox">
+                                        <label><input type="checkbox" name="pu" value="1"><strong>Pickup Contacts</strong> (any individual marked as pickup contact in the Student EC/PU Contacts Area)</label>
+                                    </div>
+                                    <div class="col-xs-12 checkbox">
+                                        <label><input type="checkbox" name="fr" value="1"><strong>Financially Responsible</strong> (any individual marked as financially responsible in the Family Financial Responsibility card)</label>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="col-xs-9 center-block form-group" style="padding-right: 0px;">
+                            <label class="control-label">Notification Message</label>
+                            <textarea name="MailMessage" id="MailMessage" required="required">
+                                
+                            </textarea>
+                            <script>
+
+                    CKEDITOR.replace( 'MailMessage' ).on( 'required', function( evt ) {
+                                $("#NotificationMessageEmpty").modal();
+	                        evt.cancel(); // Prevent submit.
+	                } );
+	
+	                
+            </script>
+                        </div>
+                        <div class="col-xs-3 center-block form-group" style="padding-left: 0px;">
+                            <label class="control-label">Variable List</label>
+                            <select multiple="true" size="10" class="form-control" placeholder="" id="variables1" ondblclick="AddVariable()">
+                                <option value="{date}">Date of incident</option>
+                                <option value="{description}">Description of incident</option>
+<!--                                <option value="{event}">Event</option>-->
+                                <option value="{ParentName}">Parent Name</option>
+                                <option value="{Stud_firstName}">Student First Name</option>
+                                <option value="{Stud_fullName}">Student Full Name</option>
+                                <option value="{Teacher_fullName}">Teacher Name</option>
+<!--                                <option value="{Weight}">Weight</option>-->
+                            </select>
+                        </div>
+                    
+                        
+                        <div class="col-xs-2 text-center form-group paddingLabel">
+                            <input type="submit" name="CreateJob" value="Send mail" class="btn btn-success" id="CreateJob" action="saveaddObjective()"/>
+                        </div>
+                </fieldset>
                        
             
                       
