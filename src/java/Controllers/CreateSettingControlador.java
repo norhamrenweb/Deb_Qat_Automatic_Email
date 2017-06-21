@@ -146,11 +146,11 @@ public class CreateSettingControlador{
         String grade_json = new Gson().toJson(grades);
          mv.addObject("gradelevels", grade_json);
 //        return mv;
-    JSONObject hi = new JSONObject();
-    hi.put("grades",grade_json);
-    hi.put("students",stu_json);
-    String test = hi.toString();
-return hi.toString();
+    JSONObject data = new JSONObject();
+    data.put("grades",grade_json);
+    data.put("students",stu_json);
+    String test = data.toString();
+return data.toString();
     } 
     public ArrayList<Students> getStudents() throws SQLException
     {
