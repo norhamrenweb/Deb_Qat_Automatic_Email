@@ -117,6 +117,103 @@ public class CreateSettingControlador{
         mv.addObject("reqtype", "edit");
         return mv;
     }
+   @RequestMapping("/createsetting/parentNotify.htm")
+    public ModelAndView parentNotify(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
+        
+        ModelAndView mv = new ModelAndView("createsettings");  
+        DriverManagerDataSource dataSource;
+        dataSource = (DriverManagerDataSource)this.getBean("dataSourceAH",hsr.getServletContext());
+        this.cn = dataSource.getConnection();
+        mv.addObject("listaAlumnos", this.getStudents());
+        return mv;
+    } 
+    public ArrayList<Students> getStudents() throws SQLException
+    {
+//        this.conectarOracle();
+        ArrayList<Students> listaAlumnos = new ArrayList<>();
+        try {
+            
+             Statement st = this.cn.createStatement();
+             
+            String consulta = "SELECT * FROM AH_ZAF.dbo.Students where Status = 'Enrolled'";
+            ResultSet rs = st.executeQuery(consulta);
+          
+            while (rs.next())
+            {
+                Students alumnos = new Students();
+                alumnos.setId_students(rs.getInt("StudentID"));
+                alumnos.setNombre_students(rs.getString("FirstName")+","+rs.getString("LastName"));
+                alumnos.setFecha_nacimiento(rs.getString("Birthdate"));
+                alumnos.setFoto(rs.getString("PathToPicture"));
+                alumnos.setLevel_id(rs.getString("GradeLevel"));
+                alumnos.setNextlevel("Placement");
+                alumnos.setSubstatus("Substatus");
+                listaAlumnos.add(alumnos);
+            }
+            //this.finalize();
+            
+        } catch (SQLException ex) {
+            System.out.println("Error leyendo Alumnos: " + ex);
+        }
+       
+        return listaAlumnos;
+    }
+     public ArrayList<Students> getStudentslevel(String gradeid) throws SQLException
+    {
+//        this.conectarOracle();
+         
+        ArrayList<Students> listaAlumnos = new ArrayList<>();
+        String gradelevel = null;
+        try {
+            
+             Statement st = this.cn.createStatement();
+            ResultSet rs1= st.executeQuery("select GradeLevel from AH_ZAF.dbo.GradeLevels where GradeLevelID ="+gradeid);
+             while(rs1.next())
+             {
+             gradelevel = rs1.getString("GradeLevel");
+             }
+           
+            String consulta = "SELECT * FROM AH_ZAF.dbo.Students where Status = 'Enrolled' and GradeLevel = '"+gradelevel+"'";
+            ResultSet rs = st.executeQuery(consulta);
+          
+            while (rs.next())
+            {
+                Students alumnos = new Students();
+                alumnos.setId_students(rs.getInt("StudentID"));
+                alumnos.setNombre_students(rs.getString("FirstName")+","+rs.getString("LastName"));
+                alumnos.setFecha_nacimiento(rs.getString("Birthdate"));
+                alumnos.setFoto(rs.getString("PathToPicture"));
+                alumnos.setLevel_id(rs.getString("GradeLevel"));
+                alumnos.setNextlevel("Placement");
+                alumnos.setSubstatus("Substatus");
+                listaAlumnos.add(alumnos);
+            }
+            //this.finalize();
+            
+        } catch (SQLException ex) {
+            System.out.println("Error leyendo Alumnos: " + ex);
+        }
+       
+        return listaAlumnos;
+         
+         
+    }
+     @RequestMapping("/createlesson/studentlistLevel.htm")
+    public ModelAndView studentlistLevel(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
+        
+        ModelAndView mv = new ModelAndView("createlesson");
+       
+         DriverManagerDataSource dataSource;
+        dataSource = (DriverManagerDataSource)this.getBean("dataSourceAH",hsr.getServletContext());
+        this.cn = dataSource.getConnection();
+        List <Students> studentsgrades = new ArrayList();
+        String[] levelid = hsr.getParameterValues("seleccion");
+        String test = hsr.getParameter("levelStudent");
+        studentsgrades =this.getStudentslevel(levelid[0]);
+        mv.addObject("listaAlumnos",studentsgrades );
+        
+        return mv;
+    }
 }
 
 
