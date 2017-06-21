@@ -466,10 +466,10 @@ $(document).ready(function(){
                             var students = JSON.parse(json.students);
                             alert(json);
                             $.each(grades, function(i, item) { 
-                                $('#levelStudent').append('<option value="'+grades[i].id+'" data-title="' + grades[i].name + '" data-content="'+grades[i].description+'">' + grades[i].name + '</option>');
+                                $('#levelStudent').append('<option value="'+grades[i].id+'" data-title="' + grades[i].name + '">' + grades[i].name + '</option>');
                             });
                              $.each(students, function(i, item) { 
-                                $('#origin').append('<option value="'+students[i].id+'" data-title="' + students[i].name + '" data-content="'+students[i].description+'">' + students[i].name + '</option>');
+                                $('#origen').append('<option value="'+students[i].id_students+'">' + students[i].nombre_students + '</option>');
                             });
                            
                         },
