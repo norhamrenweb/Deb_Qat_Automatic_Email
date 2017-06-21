@@ -484,6 +484,9 @@ $(document).ready(function(){
 
                     });    
                 }
+                function save(){
+                    
+                }
                 function funcionCallBackJob()
             {
 //                if (ajax.readyState === 4) {
@@ -666,7 +669,7 @@ $(document).ready(function(){
             <h1 class="text-center">Create Jobs</h1>
 
 
-            <form:form id="formSettings" method ="post" action="createsetting.htm?select=createsetting" >
+            <form:form id="formSettings" method ="post" action="/save.htm" >
                 <fieldset>
                     <legend>Select type Jobs</legend>
 
@@ -735,7 +738,7 @@ $(document).ready(function(){
                             <input type="button" name="AddObjective" value="Save" class="btn btn-success" id="savedEditObjective" data-target=".bs-example-modal-lg" onclick="saveeditObjective()"/> 
                         </div>
                 </fieldset>
-            <form:form id="formpepi" method ="post"  >
+            <form:form id="formpepi">
                 <fieldset class="hidden" id="BehaviorNotification">
                     <legend>Behavior notification</legend>
                     
@@ -896,7 +899,7 @@ $(document).ready(function(){
                     
                         
                         <div class="col-xs-2 text-center form-group paddingLabel">
-                            <input type="submit" name="CreateJob" value="Create Job" class="btn btn-success" id="CreateJob"/>
+                            <input type="submit" name="CreateJob" value="Create Job" class="btn btn-success" id="CreateJob" action="saveaddObjective()"/>
                         </div>
                 </fieldset>
             </form:form>   
