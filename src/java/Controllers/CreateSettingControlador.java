@@ -125,6 +125,22 @@ public class CreateSettingControlador{
         dataSource = (DriverManagerDataSource)this.getBean("dataSourceAH",hsr.getServletContext());
         this.cn = dataSource.getConnection();
         mv.addObject("listaAlumnos", this.getStudents());
+        Statement st = this.cn.createStatement();
+        ResultSet rs = st.executeQuery("SELECT GradeLevel,GradeLevelID FROM AH_ZAF.dbo.GradeLevels");
+        List <Level> grades = new ArrayList();
+        Level l = new Level();
+        l.setName("Select level");
+        grades.add(l);
+        while(rs.next())
+        {
+            Level x = new Level();
+             String[] ids = new String[1];
+             ids[0]=""+rs.getInt("GradeLevelID");
+            x.setId(ids);
+            x.setName(rs.getString("GradeLevel"));
+        grades.add(x);
+        }
+         mv.addObject("gradelevels", grades);
         return mv;
     } 
     public ArrayList<Students> getStudents() throws SQLException
