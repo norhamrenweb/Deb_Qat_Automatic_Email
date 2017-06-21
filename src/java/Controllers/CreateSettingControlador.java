@@ -118,7 +118,8 @@ public class CreateSettingControlador{
         return mv;
     }
    @RequestMapping("/createsetting/parentNotify.htm")
-    public ModelAndView parentNotify(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
+   @ResponseBody
+    public String parentNotify(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
         
         ModelAndView mv = new ModelAndView("createsettings");  
         DriverManagerDataSource dataSource;
@@ -144,7 +145,8 @@ public class CreateSettingControlador{
         }
         String grade_json = new Gson().toJson(grades);
          mv.addObject("gradelevels", grade_json);
-        return mv;
+//        return mv;
+return grade_json;
     } 
     public ArrayList<Students> getStudents() throws SQLException
     {
