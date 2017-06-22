@@ -485,42 +485,16 @@ $(document).ready(function(){
 function addMail()
 	{ 
                 var select = $('#origen option:selected').text();
-		$('#destino').text(select);
+		$('#destino').val(select);
 	};
-////SELECT STUDENT FOR SEND MAIL
-//$().ready(function() 
-//	{ 
-//                  
-//		$('.pasar').click(function() {
-//                    !$('#origen option:selected').remove().text('#destino');
-//                    var alumnosSelected = $('#destino').length;
-//                    var objectiveSelected = $('#objective').val();
-//                    if(alumnosSelected !== 0 && objectiveSelected !== 0 && objectiveSelected !== null && objectiveSelected !== ''){
-//                        $('#createOnClick').attr('disabled', false);
-//                    }
-//                    return;
-//                });  
-//		$('.quitar').click(function() {
-//                    !$('#destino option:selected').remove().val('#origen');
-//                    var alumnosSelected = $('#destino').length;
-//                    var objectiveSelected = $('#objective').val();
-//                    if(alumnosSelected === 0 || ( objectiveSelected === 0 || objectiveSelected === null || objectiveSelected === '')){
-//                        $('#createOnClick').attr('disabled', true);
-//                    }
-//                    return;  
-//                });
-//		$('.pasartodos').click(function() {
-//                    $('#origen option').each(function() { $(this).remove().appendTo('#destino'); });
-//                    var objectiveSelected = $('#objective').val();
-//                    if( objectiveSelected === 0 || objectiveSelected === null || objectiveSelected === ''){
-//                        $('#createOnClick').attr('disabled', true);
-//                    }
-//                });
-//		$('.quitartodos').click(function() {
-//                    $('#destino option').each(function() { $(this).remove().appendTo('#origen'); });
-//                    $('#createOnClick').attr('disabled', true);
-//                });
-//	});
+//Añade texto a Message title al seleccionar DEMERIT
+function merit(){
+    $('#messagetitleBN').val('Confidential - Positive Behavior Notice');
+}
+//Añade texto a Message title al seleccionar DEMERIT
+function demerit(){
+    $('#messagetitleBN').val('Confidential - Unacceptable Behavior Notice');
+}
         </script>
         <style>
             textarea 
@@ -615,14 +589,14 @@ function addMail()
                             <label class="control-label">Title Job</label>
                             <input type="text" class="form-control" name="TXTnamenewobjective" id="titleJobBN"  placeholder="Name" required>
                         </div>
-                    <div class="col-xs-3 center-block form-group" id="messageTitle">
+                    <div class="col-xs-6 center-block form-group" id="messageTitle">
                             <label class="control-label">Message title</label>
-                            <input type="text" class="form-control" name="TXTnamenewmessage" id="messagetitleBN"  placeholder="Name" required>
+                            <input type="text" class="form-control" name="TXTnamenewmessage" id="messagetitleBN" required>
                         </div>
                         <div class="col-xs-12 center-block form-group">
                             <div class="col-xs-3 center-block form-group">
-                                <label class="radio"><input type="radio" name="meritBN" value="demerit">Demerit</label>
-                                <label class="radio"><input type="radio" name="meritBN" value="merit">Merit</label>
+                                <label class="radio"><input type="radio" name="meritBN" value="demerit" onclick="demerit()">Demerit</label>
+                                <label class="radio"><input type="radio" name="meritBN" value="merit" onclick="merit()">Merit</label>
                             </div>
 <!--                            <div class="col-xs-3 center-block form-group">
                                 <label class="radio"><input type="radio" name="event">Single event</label>
