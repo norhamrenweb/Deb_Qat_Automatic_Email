@@ -51,7 +51,7 @@
     </property> 
     </bean>-->
 <!--    <bean class="Controllers.ProgressbyStudent" id="studentprog"/>-->
-    <bean class="Controllers.CreateSettingControlador" id="createsetting"/>
+    <bean class="Controllers.CreateSettingControlador" id="createjob"/>
 <!--    <bean class="Controllers.CreateLessonControlador" id="createlesson"/>-->
     <bean class="Controllers.JobsListControlador" id="lessonsList"/>
      <bean class="Controllers.ReportControlador" id="report"/>
@@ -123,7 +123,7 @@
 <!--                 <prop key="familymap2.htm">map</prop>-->
                  
 <!--                <prop key="createlesson.htm">createlesson</prop>-->
-                <prop key="createsetting.htm">createsetting</prop>
+                <prop key="createjob.htm">createjob</prop>
                 
                 <prop key="datosIdioma.htm">ControladorIdioma</prop>
                 <prop key="homepage.htm">lessonsList</prop>

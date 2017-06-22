@@ -61,17 +61,17 @@ public class CreateSettingControlador{
         Object beanobject = contexto.getBean(nombrebean);
         return beanobject;
     }
-    @RequestMapping("/createsetting/start.htm")
+    @RequestMapping("/createjob/start.htm")
     public ModelAndView start(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
         
-        ModelAndView mv = new ModelAndView("createsettings");  
+        ModelAndView mv = new ModelAndView("createjob");  
         
         return mv;
     }
-    @RequestMapping("/createsetting/save.htm")
+    @RequestMapping("/createjob/save.htm")
     public ModelAndView save(@RequestBody Jobs job, HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
         
-        ModelAndView mv = new ModelAndView("createsettings");
+        ModelAndView mv = new ModelAndView("createjob");
        try {
         HttpSession sesion = hsr.getSession();
         User user = (User) sesion.getAttribute("user");
@@ -89,10 +89,10 @@ public class CreateSettingControlador{
         
         return mv;
     }
- @RequestMapping("/createsetting/edit.htm")
+ @RequestMapping("/createjob/edit.htm")
     public ModelAndView edit(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
         
-        ModelAndView mv = new ModelAndView("createsettings");  
+        ModelAndView mv = new ModelAndView("createjob");  
          String jobid = hsr.getParameter("jobid");
          DriverManagerDataSource dataSource;
         dataSource = (DriverManagerDataSource)this.getBean("dataSource",hsr.getServletContext());
@@ -117,11 +117,11 @@ public class CreateSettingControlador{
         mv.addObject("reqtype", "edit");
         return mv;
     }
-   @RequestMapping("/createsetting/parentNotify.htm")
+   @RequestMapping("/createjob/parentNotify.htm")
    @ResponseBody
     public String parentNotify(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
         
-        ModelAndView mv = new ModelAndView("createsettings");  
+        ModelAndView mv = new ModelAndView("createjob");  
         DriverManagerDataSource dataSource;
         dataSource = (DriverManagerDataSource)this.getBean("dataSourceAH",hsr.getServletContext());
         this.cn = dataSource.getConnection();
