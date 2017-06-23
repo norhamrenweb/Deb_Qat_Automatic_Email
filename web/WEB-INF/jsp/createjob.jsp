@@ -443,12 +443,17 @@ $(document).ready(function(){
                 });
             });
             
-            function AddVariable()
+            function AddVariable(typeJobs)
             {
     
-               var value = $('#variables1 option:selected').val();
-               CKEDITOR.instances['NotificationMessage'].insertText(value);
-               CKEDITOR.instances['MailMessage'].insertText(value);
+               
+                if(typeJobs === 1 ){
+                    var value = $('#variables1 option:selected').val();
+                    CKEDITOR.instances['NotificationMessage'].insertText(value);
+                }else if(typeJobs === 2 ){
+                    var value = $('#variables2 option:selected').val();
+                    CKEDITOR.instances['MailMessage'].insertText(value);
+                }
              }
             function ShowRecipients()
             {
@@ -485,42 +490,17 @@ $(document).ready(function(){
 function addMail()
 	{ 
                 var select = $('#origen option:selected').text();
-		$('#destino').text(select);
+                var contenido = $('#destino').val();
+		$('#destino').val(contenido + ", " + select);
 	};
-////SELECT STUDENT FOR SEND MAIL
-//$().ready(function() 
-//	{ 
-//                  
-//		$('.pasar').click(function() {
-//                    !$('#origen option:selected').remove().text('#destino');
-//                    var alumnosSelected = $('#destino').length;
-//                    var objectiveSelected = $('#objective').val();
-//                    if(alumnosSelected !== 0 && objectiveSelected !== 0 && objectiveSelected !== null && objectiveSelected !== ''){
-//                        $('#createOnClick').attr('disabled', false);
-//                    }
-//                    return;
-//                });  
-//		$('.quitar').click(function() {
-//                    !$('#destino option:selected').remove().val('#origen');
-//                    var alumnosSelected = $('#destino').length;
-//                    var objectiveSelected = $('#objective').val();
-//                    if(alumnosSelected === 0 || ( objectiveSelected === 0 || objectiveSelected === null || objectiveSelected === '')){
-//                        $('#createOnClick').attr('disabled', true);
-//                    }
-//                    return;  
-//                });
-//		$('.pasartodos').click(function() {
-//                    $('#origen option').each(function() { $(this).remove().appendTo('#destino'); });
-//                    var objectiveSelected = $('#objective').val();
-//                    if( objectiveSelected === 0 || objectiveSelected === null || objectiveSelected === ''){
-//                        $('#createOnClick').attr('disabled', true);
-//                    }
-//                });
-//		$('.quitartodos').click(function() {
-//                    $('#destino option').each(function() { $(this).remove().appendTo('#origen'); });
-//                    $('#createOnClick').attr('disabled', true);
-//                });
-//	});
+//Añade texto a Message title al seleccionar DEMERIT
+function merit(){
+    $('#messagetitleBN').val('Confidential - Positive Behavior Notice');
+}
+//Añade texto a Message title al seleccionar DEMERIT
+function demerit(){
+    $('#messagetitleBN').val('Confidential - Unacceptable Behavior Notice');
+}
         </script>
         <style>
             textarea 
@@ -543,7 +523,6 @@ function addMail()
 
                     <div class="col-xs-12">
                         <div class="col-xs-6 form-group">
-                            <label class="control-label"><spring:message code="etiq.txtlevels"/></label>
                             <select class="form-control" name="TXTlevel" id="typeJob" onchange="funcionCallBackJob()">
                                 <option value="0" >Select type</option>
                                 <option value="1" disabled>Accounting notification</option>
@@ -615,14 +594,14 @@ function addMail()
                             <label class="control-label">Title Job</label>
                             <input type="text" class="form-control" name="TXTnamenewobjective" id="titleJobBN"  placeholder="Name" required>
                         </div>
-                    <div class="col-xs-3 center-block form-group" id="messageTitle">
+                    <div class="col-xs-6 center-block form-group" id="messageTitle">
                             <label class="control-label">Message title</label>
-                            <input type="text" class="form-control" name="TXTnamenewmessage" id="messagetitleBN"  placeholder="Name" required>
+                            <input type="text" class="form-control" name="TXTnamenewmessage" id="messagetitleBN" required>
                         </div>
                         <div class="col-xs-12 center-block form-group">
                             <div class="col-xs-3 center-block form-group">
-                                <label class="radio"><input type="radio" name="meritBN" value="demerit">Demerit</label>
-                                <label class="radio"><input type="radio" name="meritBN" value="merit">Merit</label>
+                                <label class="radio"><input type="radio" name="meritBN" value="demerit" onclick="demerit()">Demerit</label>
+                                <label class="radio"><input type="radio" name="meritBN" value="merit" onclick="merit()">Merit</label>
                             </div>
 <!--                            <div class="col-xs-3 center-block form-group">
                                 <label class="radio"><input type="radio" name="event">Single event</label>
@@ -634,71 +613,10 @@ function addMail()
                                 <label class="radio"><input type="radio" name="runBN" value="weekly" required="required">Run weekly</label>
                             </div>
                             <div class="col-xs-3 center-block form-group">
-<!--                            <label class="control-label">Run at:</label>
-                            <select class="form-control" name="TXTrunAt">
-                                <option value="0">00:00</option>
-                                <option value="1">01:00</option>
-                                <option value="2">02:00</option>
-                                <option value="3">03:00</option>
-                                <option value="4">04:00</option>
-                                <option value="5">05:00</option>
-                                <option value="6">06:00</option>
-                                <option value="7">07:00</option>
-                                <option value="8">08:00</option>
-                                <option value="9">09:00</option>
-                                <option value="10">10:00</option>
-                                <option value="11">11:00</option>
-                                <option value="12">12:00</option>
-                                <option value="13">13:00</option>
-                                <option value="14">14:00</option>
-                                <option value="15">15:00</option>
-                                <option value="16">16:00</option>
-                                <option value="17">17:00</option>
-                                <option value="18">18:00</option>
-                                <option value="19">19:00</option>
-                                <option value="20">20:00</option>
-                                <option value="21">21:00</option>
-                                <option value="22">22:00</option>
-                                <option value="23">23:00</option>
-                                
-                            </select>-->
                         </div>
                         </div>
                         <div class="col-xs-12 center-block form-group">
-<!--                            <div class="col-xs-4 center-block form-group" style="padding: 0px;">
-                                <label class="control-label">Time Frame</label>
-                                <div class="col-xs-12 table table-bordered">
-                                    <div class="col-xs-6">
-                                        <label class="radio"><input type="radio" name="TimeFrame">Single Day</label>
-                                        <label class="radio"><input type="radio" name="TimeFrame">Current Term</label>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <label class="radio"><input type="radio" name="TimeFrame">Current Semester</label>
-                                        <label class="radio"><input type="radio" name="TimeFrame">Current Year</label>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <label class="radio">
-                                            <input type="radio" name="TimeFrame" id="TimeFrame">Custom Dates
-                                        </label>
-                                        <div class="col-xs-6">
-                                            <div class='input-group date' id='dateStart'>
-                                                <input type='text' name="TXTdateStart" id="TXTdateStart" class="form-control" disabled="true"/>
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <div class='input-group date' id='dateEnd'>
-                                                <input type='text' name="TXTdateEnd" id="TXTdateEnd" class="form-control" disabled="true"/>
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>-->
+
                             <div class="col-xs-4 center-block form-group">
                                 <label class="control-label">Notification Source</label>
                                 <div class="col-xs-12 table-bordered">
@@ -710,21 +628,7 @@ function addMail()
                                         <input type="email" class="form-control" name="TXTSchoolRepresentative" id="schoolRep" placeholder="Email Address" required disabled >
                                     </div> 
                                 </div>
-                            </div>
-<!--                            <div class="col-xs-4 center-block form-group">
-                                <label class="control-label">Send Notification to:</label>
-                                <div class="col-xs-12 table-bordered">
-                                    <div class="col-xs-12">
-                                    <label class="checkbox"><input type="checkbox" name="SendNotification">Student</label>
-                                    <label class="checkbox"><input type="checkbox" name="SendNotification">Parent</label>
-                                    <label class="checkbox"><input type="checkbox" name="SendNotification">Advisor</label>
-                                
-                                    <label class="radio">School Representative (email address)</label>
-                                    <input type="text" name="emailSchoolRepresentative">
-                                    </div>
-                                </div>
-                            </div>-->
-                            
+                            </div>                          
                         </div>
                         <div class="col-xs-9 center-block form-group" style="padding-right: 0px;">
                             <label class="control-label">Notification Message</label>
@@ -754,7 +658,7 @@ function addMail()
                         </div>
                         <div class="col-xs-3 center-block form-group" style="padding-left: 0px;">
                             <label class="control-label">Variable List</label>
-                            <select multiple="true" size="10" class="form-control" placeholder="" id="variables" ondblclick="AddVariable()">
+                            <select multiple="true" size="10" class="form-control" placeholder="" id="variables1" ondblclick="AddVariable(1)">
                                 <option value="{date}">Date of incident</option>
                                 <option value="{description}">Description of incident</option>
 <!--                                <option value="{event}">Event</option>-->
@@ -794,34 +698,6 @@ function addMail()
                                 <label class="radio"><input type="radio" name="run">Run weekly</label>
                             </div>
                             <div class="col-xs-3 center-block form-group">
-<!--                            <label class="control-label">Run at:</label>
-                            <select class="form-control" name="TXTrunAt">
-                                <option value="0">00:00</option>
-                                <option value="1">01:00</option>
-                                <option value="2">02:00</option>
-                                <option value="3">03:00</option>
-                                <option value="4">04:00</option>
-                                <option value="5">05:00</option>
-                                <option value="6">06:00</option>
-                                <option value="7">07:00</option>
-                                <option value="8">08:00</option>
-                                <option value="9">09:00</option>
-                                <option value="10">10:00</option>
-                                <option value="11">11:00</option>
-                                <option value="12">12:00</option>
-                                <option value="13">13:00</option>
-                                <option value="14">14:00</option>
-                                <option value="15">15:00</option>
-                                <option value="16">16:00</option>
-                                <option value="17">17:00</option>
-                                <option value="18">18:00</option>
-                                <option value="19">19:00</option>
-                                <option value="20">20:00</option>
-                                <option value="21">21:00</option>
-                                <option value="22">22:00</option>
-                                <option value="23">23:00</option>
-                                
-                            </select>-->
                         </div>
                         </div>
                         <div class="col-xs-12 center-block form-group">
@@ -868,27 +744,6 @@ function addMail()
                                             </c:forEach>
                                         </select>
                                     </div>
-
-<!--                                    <div class="col-xs-1" style="padding: 0px;">
-                                        <div class="col-xs-12 text-center" style="padding-bottom: 10px; padding-top: 50px; padding-left: 0px; padding-right: 0px;">
-                                            <input type="button" class="btn btn-success btn-block pasar" value="»">
-                                        </div>
-                                        <div class="col-xs-12 text-center" style="padding-bottom: 10px; padding-left: 0px; padding-right: 0px;">
-                                            <input type="button" class="btn btn-danger btn-block quitar" value="«">
-                                        </div>
-                                        <div class="col-xs-12 text-center" style="padding-bottom: 10px; padding-left: 0px; padding-right: 0px;">
-                                            <input type="button" class="btn btn-success btn-block pasartodos" value="»">
-                                        </div>
-                                        <div class="col-xs-12 text-center" style="padding-bottom: 10px; padding-left: 0px; padding-right: 0px;">
-                                            <input type="button" class="btn btn-danger btn-block quitartodos" value="«">
-                                        </div>
-                                    </div>-->
-
-<!--                                    <div class="col-xs-4">
-                                        <select class="form-control submit" size="20" multiple name="destino[]" id="destino" style="width: 100% !important;"> 
-
-                                        </select>
-                                    </div>-->
                                 </div>
                                 </fieldset>
                             </div>
@@ -945,7 +800,7 @@ function addMail()
                         </div>
                         <div class="col-xs-3 center-block form-group" style="padding-left: 0px;">
                             <label class="control-label">Variable List</label>
-                            <select multiple="true" size="10" class="form-control" placeholder="" id="variables1" ondblclick="AddVariable()">
+                            <select multiple="true" size="10" class="form-control" placeholder="" id="variables2" ondblclick="AddVariable(2)">
                                 <option value="{date}">Date of incident</option>
                                 <option value="{description}">Description of incident</option>
 <!--                                <option value="{event}">Event</option>-->

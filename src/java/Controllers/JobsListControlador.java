@@ -46,7 +46,7 @@ public class JobsListControlador{
         return beanobject;
     }
    @RequestMapping("/homepage/loadJobs.htm")
-    public ModelAndView loadLessons(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
+    public ModelAndView loadJobs(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
         
         ModelAndView mv = new ModelAndView("homepage");
        
@@ -159,14 +159,20 @@ public class JobsListControlador{
 //        return mv;
 //    }
  @RequestMapping("/homepage/runJob.htm")
-    public ModelAndView runJob(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
+@ResponseBody
+    public String runJob(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
         
-        ModelAndView mv = new ModelAndView("homepage");
-       String jobid = hsr.getParameter("jobid");
+//        ModelAndView mv = new ModelAndView("redirect:/homepage/loadJobs.htm", "messageJobExecuted", "Job executed" );
+        ModelAndView mv = new ModelAndView("loadJobs"); 
+        String jobid = hsr.getParameter("jobid");
         SendEmailJobs.sendEmails(3);
-        mv.addObject("message","Job executed");
+//        mv.addObject("messageJobExecuted","Job executed");
+        JSONObject data = new JSONObject();
+        data.put("messageJobExecuted","Job executed");
+    
+    String test = data.toString();
+    return data.toString();
         
-        
-        return mv;
+//        return mv;
     }
 }
