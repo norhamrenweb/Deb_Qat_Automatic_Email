@@ -485,7 +485,8 @@ $(document).ready(function(){
 function addMail()
 	{ 
                 var select = $('#origen option:selected').text();
-		$('#destino').val(select);
+                var contenido = $('#destino').val();
+		$('#destino').val(contenido + ", " + select);
 	};
 //Añade texto a Message title al seleccionar DEMERIT
 function merit(){
