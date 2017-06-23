@@ -25,7 +25,27 @@
         //VARIABLE CUANDO HEMOS CREADO UNA LESSONS CORRECTAMENTE
         
    <%--      var lessondelete = '<%= request.getParameter("messageDelete") %>'; --%>
-         
+            var userLang = navigator.language || navigator.userLanguage;
+      $('#start').datetimepicker({
+            
+            format: 'YYYY-MM-DD',
+            locale: userLang.valueOf(),
+            daysOfWeekDisabled: [0, 6],
+            useCurrent: false//Important! See issue #1075
+            //defaultDate: '08:32:33',
+
+  
+        });
+        $('#end').datetimepicker({
+            
+            format: 'YYYY-MM-DD',
+            locale: userLang.valueOf(),
+            daysOfWeekDisabled: [0, 6],
+            useCurrent: false//Important! See issue #1075
+            //defaultDate: '08:32:33',
+
+  
+        }); 
      
     $('#table_id').DataTable({
     "aLengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
@@ -248,12 +268,32 @@ var ajax;
     </style>
     </head>
     <body>
-        
-        <form name="activitylog" action="<c:url value="/html"/>" method="POST"/>
-        <input type="text" name="start" value="" />
-        <input type="text" name="end" value="" />
-        <input type="submit" value="Run" name="Run" />
-        </form>
+        <c:url var="post_url"  value="/html" />
+        <form:form name="activitylog" action="${post_url}" method="POST">
+        <div class="container">
+            <div class="col-xs-3 form-group">
+                <label class="control-label" for="fecha">Date</label>
+                <div class='input-group date' id='fecha'>
+                    <input type='text' name="TXTfecha" class="form-control" id="start"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-xs-3 form-group">
+                <label class="control-label" for="fecha">Date</label>
+                <div class='input-group date' id='fecha'>
+                    <input type='text' name="TXTfecha" class="form-control" id="end"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-xs-3 form-group">
+                <input type="submit" class="btn" value="Run" name="Run" />
+            </div>
+        </div>
+</form:form>
         
     </body>
 </html>
