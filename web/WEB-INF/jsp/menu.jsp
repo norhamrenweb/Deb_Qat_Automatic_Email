@@ -18,14 +18,14 @@
     <!--MENU LATERAL-->
     <div id="barralateral">
         <nav>
-            <div class="col-xs-12 iconosmenulateral"><a href="<c:url value="/homepage/loadJobs.htm"/>" ><input type="image" src="<c:url value="/recursos/img/iconos/home-01.svg"/>" data-toggle="tooltip" data-placement="top" title="<spring:message code="etiq.txthome"/>"></a></div>
+            <div class="col-xs-12 iconosmenulateral"><a href="<c:url value="/homepage/loadJobs.htm"/>" ><input type="image" src="<c:url value="/recursos/img/iconos/home-01.svg"/>" data-toggle="tooltip" data-placement="top" title="Homepage"></a></div>
 <!--            <div class="col-xs-12 iconosmenulateral"><a href="lessonList.htm?accion=loadLessons"><div class="center-block"><input type="image" src="<c:url value="/recursos/img/iconos/Calendar-01.svg"/>" data-toggle="tooltip" data-placement="top" title="View calendar"></div></a></div>
             <div class="col-xs-12 iconosmenulateral"><a href="<c:url value="/html "/>"><div class="center-block"><input type="image" src="<c:url value="/recursos/img/iconos/LessonsIdea.svg"/>" data-toggle="tooltip" data-placement="top" title="Lessons Idea"></div></a></div>
             <div class="col-xs-12 iconosmenulateral"><a href="<c:url value="/report/selectdate.htm"/>" ><div class="center-block"><input type="image" src="<c:url value="/recursos/img/iconos/classroomDashboard-01.svg"/>" data-toggle="tooltip" data-placement="top" title="<spring:message code="etiq.txtlessons"/>"></div></a></div>
             <div class="col-xs-12 iconosmenulateral"><a href="<c:url value="/progressbystudent/start.htm"/>" ><div class="center-block"><input type="image" src="<c:url value="/recursos/img/iconos/students-01.svg"/>" data-toggle="tooltip" data-placement="top" title="<spring:message code="etiq.txtstudents"/>"></div></a></div>-->
-            <div class="col-xs-12 iconosmenulateral"><a href="<c:url value="/createjob/start.htm"/>" ><div class="center-block"><input type="image" src="<c:url value="/recursos/img/iconos/CreateSettings-01.svg"/>" data-toggle="tooltip" data-placement="top" title="Create Settings"></div></a></div>
-            <div class="col-xs-12 iconosmenulateral"><a href="<c:url value="/html "/>"><div class="center-block"><input type="image" src="<c:url value="/recursos/img/iconos/Reports.svg"/>" data-toggle="tooltip" data-placement="top" title="Reports"></div></a></div>
-            <div class="col-xs-12 iconosmenulateral"><a href="<c:url value="/report/selectdate.htm"/>" ><div class="center-block"><input type="image" src="<c:url value="/recursos/img/iconos/classroomDashboard-01.svg"/>" data-toggle="tooltip" data-placement="top" title="<spring:message code="etiq.txtlessons"/>"></div></a></div>
+            <div class="col-xs-12 iconosmenulateral"><a href="<c:url value="/createjob/start.htm"/>" ><div class="center-block"><input type="image" src="<c:url value="/recursos/img/iconos/CreateSettings-01.svg"/>" data-toggle="tooltip" data-placement="top" title="Create new job"></div></a></div>
+<!--            <div class="col-xs-12 iconosmenulateral"><a href="<c:url value="/html "/>"><div class="center-block"><input type="image" src="<c:url value="/recursos/img/iconos/Reports.svg"/>" data-toggle="tooltip" data-placement="top" title="Activity log report"></div></a></div>-->
+            <div class="col-xs-12 iconosmenulateral"><a href="<c:url value="/report/selectdate.htm"/>" ><div class="center-block"><input type="image" src="<c:url value="/recursos/img/iconos/classroomDashboard-01.svg"/>" data-toggle="tooltip" data-placement="top" title="Activity log report"></div></a></div>
 <!--             <div class="col-xs-12">
                 <hr>
             </div>

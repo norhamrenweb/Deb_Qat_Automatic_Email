@@ -71,7 +71,7 @@ public class JobsListControlador{
             
              Statement st = this.cn.createStatement();
              
-            String consulta = "SELECT * FROM jobs ";
+            String consulta = "SELECT * FROM jobs where COALESCE(deleted, FALSE) = FALSE ";
             ResultSet rs = st.executeQuery(consulta);
           
             while (rs.next())
@@ -123,11 +123,11 @@ public class JobsListControlador{
         HttpSession sesion = hsr.getSession();
         User user = (User) sesion.getAttribute("user");
          Statement st = this.cn.createStatement();
-         
-        String consulta = "DELETE FROM jobs WHERE id="+id[0];
+        String consulta = "update jobs set deleted = TRUE WHERE id="+id[0];
            st.executeUpdate(consulta);
            message = "Job deleted successfully";
         jsonObj.put("message", message);
+        
        }catch (SQLException ex) {
             System.out.println("Error : " + ex);
         }
@@ -165,7 +165,7 @@ public class JobsListControlador{
 //        ModelAndView mv = new ModelAndView("redirect:/homepage/loadJobs.htm", "messageJobExecuted", "Job executed" );
         ModelAndView mv = new ModelAndView("loadJobs"); 
         String jobid = hsr.getParameter("jobid");
-        SendEmailJobs.sendEmails(3);
+        SendEmailJobs.sendEmails(Integer.parseInt(jobid));
 //        mv.addObject("messageJobExecuted","Job executed");
         JSONObject data = new JSONObject();
         data.put("messageJobExecuted","Job executed");
