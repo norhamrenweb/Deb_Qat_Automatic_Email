@@ -536,9 +536,6 @@ function demerit(){
                                 <option value="9" disabled >NelNet/Pay now notification</option>
                                 <option value="10" disabled >Web form notification</option>
                                 <option value="11" >Parents notification</option>
-                                <%--<c:forEach var="levels" items="${typejob}">
-                                    <option value="${job.id[0]}" >${job.name}</option>
-                                </c:forEach>--%>
                             </select>
                         </div>
                     </div>
