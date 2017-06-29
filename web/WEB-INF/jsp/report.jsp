@@ -274,7 +274,7 @@ var ajax;
             <div class="col-xs-3 form-group">
                 <label class="control-label" for="fecha">Date</label>
                 <div class='input-group date' id='fecha'>
-                    <input type='text' name="TXTfecha" class="form-control" id="start"/>
+                    <input type='text' name="start" class="form-control" id="start"/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -283,7 +283,7 @@ var ajax;
             <div class="col-xs-3 form-group">
                 <label class="control-label" for="fecha">Date</label>
                 <div class='input-group date' id='fecha'>
-                    <input type='text' name="TXTfecha" class="form-control" id="end"/>
+                    <input type='text' name="end" class="form-control" id="end"/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>

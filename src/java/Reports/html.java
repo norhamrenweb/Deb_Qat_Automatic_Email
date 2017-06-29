@@ -82,7 +82,7 @@ public class html extends HttpServlet {
             JasperFillManager jasperFillManager = JasperFillManager.getInstance(context);
                 //PrintWriter out = response.getWriter()) 
                 Class.forName("org.postgresql.Driver");
-                conn = DriverManager.getConnection("jdbc:postgresql://192.168.1.3:5432/Maintenance_jobs?user=eduweb&password=Madrid2016");
+                conn = DriverManager.getConnection("jdbc:postgresql://192.168.1.9:5432/Maintenance_jobs?user=eduweb&password=Madrid2016");
         response.setContentType("text/html;charset=UTF-8");
         HtmlExporter exporter = new HtmlExporter(); 
         InputStream jasperStream = this.getClass().getResourceAsStream("Mailactivitylog.jasper");

@@ -177,7 +177,7 @@ var ajax;
         }
         
         ajax.onreadystatechange = funcionCallBackdeleteLesson;
-        ajax.open("POST","deleteLesson.htm?LessonsSelected="+LessonsSelected,true);
+        ajax.open("POST","deleteJob.htm?JobsSelected="+LessonsSelected,true);
     <%-- window.open("<c:url value="/homepage/deleteLesson.htm?LessonsSelected="/>"+LessonsSelected); --%>
         ajax.send("");
       
@@ -252,7 +252,7 @@ var ajax;
                                     <input name="TXTid_lessons_edit" class="btn-unbutton" type="image" src="<c:url value="/recursos/img/btn/btn_Edit.svg"/>" value="${jobs.id}" id="edit" onclick="EditJob(${jobs.id})" width="40px" data-placement="bottom" title="Edit">
                                 </div>
                                  <div class="col-xs-4">
-                                    <input name="TXTid_lessons_viewLog" type="image" src="<c:url value="/recursos/img/iconos/DelJob.svg"/>" value="${jobs.id}" id="viewLog" onclick="delJob(${jobs.id})" width="40px" data-placement="bottom" title="View Log">
+                                    <input name="TXTid_lessons_viewLog" type="image" src="<c:url value="/recursos/img/iconos/DelJob.svg"/>" value="${jobs.id}" id="viewLog" onclick="deleteSelectSure(${jobs.id},'${jobs.name}')" width="40px" data-placement="bottom" title="Delete">
                                 </div>
 <!--                                <div class="col-xs-4">
                                     <input name="TXTid_lessons_viewLog" type="image" src="<c:url value="/recursos/img/iconos/ViewLog.svg"/>" value="${jobs.id}" id="viewLog" onclick="detailsSelect(${jobs.id})" width="40px" data-placement="bottom" title="View Log">

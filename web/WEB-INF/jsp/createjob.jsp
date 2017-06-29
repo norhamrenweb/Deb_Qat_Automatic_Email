@@ -565,7 +565,7 @@ function demerit(){
                             <label class="radio-inline"><input type="radio" name="frecuency">Parent preference</label>
                         </div>
                         <div class="col-xs-2 text-center form-group paddingLabel">
-                            <input type="button" name="AddObjective" value="save" class="btn btn-success" id="AddObjective" data-target=".bs-example-modal-lg" onclick="saveaddObjective()"/>
+                            <input type="button" name="AddObjective" value="save" class="btn btn-success" id="AddObjective" data-target=".bs-example-modal-lg" onclick="saveaddObjective1()"/>
                         </div>
                 </fieldset>
                 <fieldset class="hidden" id="AttendanceNotification">
@@ -669,7 +669,7 @@ function demerit(){
                     
                         
                         <div class="col-xs-2 text-center form-group paddingLabel">
-                            <input type="submit" name="CreateJob" value="Create Job" class="btn btn-success" id="CreateJob" action="saveaddObjective()"/>
+                            <input type="submit" name="CreateJob" value="Create Job" class="btn btn-success" id="CreateJob" onclick="saveaddObjective()"/>
                         </div>
                 </fieldset>
             </form:form>   
@@ -703,7 +703,7 @@ function demerit(){
                         </div>
                         
                         <div class="col-xs-2 text-center form-group paddingLabel">
-                            <input type="button" name="AddObjective" value="save" class="btn btn-success" id="AddObjective" data-target=".bs-example-modal-lg" onclick="saveaddObjective()"/>
+                            <input type="button" name="AddObjective" value="save" class="btn btn-success" id="AddObjective" data-target=".bs-example-modal-lg" onclick="saveaddObjective3()"/>
                         </div>
                 </fieldset>
 <!--                FORMULARIO NOTIFICACION PADRES MAIL OCULTO        -->
@@ -811,7 +811,7 @@ function demerit(){
                     
                         
                         <div class="col-xs-2 text-center form-group paddingLabel">
-                            <input type="submit" name="CreateJob" value="Send mail" class="btn btn-success" id="CreateJob" action="saveaddObjective()"/>
+                            <input type="submit" name="CreateJob4" value="Send mail" class="btn btn-success" id="CreateJob4" action="saveaddObjective4()"/>
                         </div>
                 </fieldset>
                        
